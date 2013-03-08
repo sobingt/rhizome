@@ -1,0 +1,72 @@
+{
+  "options": [
+    {
+      "id": "12342",
+      "title": "DIY space",
+      "content": "An open space for arts and crafts",
+      "argument_count": "4",
+      "arguments": [
+        {
+          "id": "1.",
+          "timestamp": "February 14th 2010, 3:25:50 pm",
+          "text": "Lorem ipsum",
+          "replies": [
+            {
+              "id": "1.1.",
+              "timestamp": "February 14th 2010, 3:25:50 pm",
+              "text": "This is a reply",
+              "replies": []
+            },
+            {
+              "id": "1.2.",
+              "timestamp": "February 14th 2010, 3:25:50 pm",
+              "text": "This is another reply",
+              "replies": []
+            }
+          ]
+        },
+        {
+          "id": "2.",
+          "timestamp": "February 14th 2010, 3:25:50 pm",
+          "text": "Another argument",
+          "replies": []
+        }
+      ]
+    },
+    {
+      "id": "12341",
+      "title": "Community garden",
+      "content": "A cooperatively-run, non-profit community garden for low-cost organic vegetables and other hip swag blaze it. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "argument_count": "0",
+      "arguments": []
+    },
+    {
+      "id": "12343",
+      "title": "Open science lab",
+      "content": "Noisebridge/BioCurious in the East Bay",
+      "argument_count": "0",
+      "arguments": []
+    },
+    {
+      "id": "12344",
+      "title": "Bicycle co-op",
+      "content": "A place to build and maintain bikes",
+      "argument_count": "0",
+      "arguments": []
+    },
+    {
+      "id": "12345",
+      "title": "Ecumenical temple",
+      "content": "A space to perform rituals and stuff",
+      "argument_count": "0",
+      "arguments": []
+    },
+    {
+      "id": "12346",
+      "title": "Parking lot",
+      "content": "I am a conservative",
+      "argument_count": "0",
+      "arguments": []
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+/* -------------------------------------------------- 
+   Table of Contents
+-----------------------------------------------------
+:: Shared Styles
+:: Decision
+*/
+
+
+/* -----------------------------------------
+   Shared Styles
+----------------------------------------- */
+p, span {
+	color: #666;
+}
+header {
+	padding: 20px 0;
+}
+header .logo {
+	height: 20px;
+	width: auto;
+}
+
+/* -----------------------------------------
+   Decision
+----------------------------------------- */
+
+#question {
+	padding-bottom: 20px;
+}
+#info {
+	text-align: right;
+}
+#info span {
+	line-height: 1.5em;
+}
+
+.option { background: #fff; border: solid 1px #e6e6e6; margin: 0 0 22px 0; padding: 0; min-height: 100px; -webkit-box-shadow: 0 1px 3px 0 #eee; }
+.option > :first-child { margin-top: 0; }
+.option > :last-child { margin-bottom: 0; }
+.option.callout { background: #2ba6cb; color: #fff; border-color: #2284a1; -webkit-box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.5); -moz-box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.5); box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.5); }
+.option.callout a { color: #fff; }
+.option.callout .button { background: white; border: none; color: #2ba6cb; text-shadow: none; }
+.option.callout .button:hover, .panel.callout .button:focus { background: rgba(255, 255, 255, 0.8); }
+.option.radius { -webkit-border-radius: 3px; -moz-border-radius: 3px; -ms-border-radius: 3px; -o-border-radius: 3px; border-radius: 3px; }
+
+.option .buttons {
+	float: left;
+	text-align: right;
+}
+.option .buttons p {
+	margin: 10px;
+	padding-right: 5px;
+}
+.option .buttons .button {
+	width: 60px;
+	margin: 0;
+}
+.option .info {
+	margin: 10px;
+}
+.option .info p {
+	margin: 0;
+}
+.option .discussion-link {
+	float: right;
+	margin: 10px;
+}
+.option.yes, .option.no {
+	min-height: 0;
+}
+.option.yes {
+	background-color: #efc;
+}
+.option.no {
+	background-color: #fee;
+}
+.option.remaining {
+	min-height: 0;
+	text-align: center;
+}
+.qr-code {
+	float: right;
+	height: 80px;
+}
+.new-option-button {
+	float: right;
+}
+.ranked-votes {
+	text-align: center;
+}
+
+.argument-list li {
+	list-style-type: none;
+}
+.argument-list li .buttons {
+	float: right;
+	display: none;
+}
+.argument-list li .id {
+	color: #000;
+	margin-right: 10px;
+}
+.argument-list li .timestamp {
+	color: #fff;
+}
+.argument-list li .argument:hover > .timestamp {
+	color: #ccc;
+}
+.argument-list li .argument:hover > .buttons {
+	display: block;
+}
+.new-argument-input {
+	height: 100px;
+}
+.new-argument-button {
+	float: right;
+}
+#new-option textarea {
+	height: 300px;
+}
+
+/* -----------------------------------------
+   Page Name 2
+----------------------------------------- */
+

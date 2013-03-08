@@ -1,0 +1,60 @@
+extends layout
+
+block content
+  header.row
+    .small-12.columns
+      img(src='img/logo.png').logo
+  .row
+    .small-12.columns
+      ul.breadcrumbs
+        li
+          a(href='#') Home
+        li
+          a(href='#') USA
+        li
+          a(href='#') California
+        li
+          a(href='#') Berkeley
+        li.current
+          a(href='#') What to do with the empty lot in Ridge?
+  .row
+    .small-8.columns#question
+      h4 What to do with the empty lot in Ridge?
+      p Let's replace the empty parking lot on Ridge Road with a good public space.
+    .small-4.columns#info
+      span
+        | Started by 
+        a(href='#') Carl Sagan
+        | <br />
+      span Ends in 4 days<br />
+      span
+        a(href='#') 42 participants
+  .row
+    .small-4.columns
+      dl.sub-nav
+        dt Options:
+        dd
+          a(href='#') New
+        dd.active
+          a(href='#') Unvoted
+        dd
+          a(href='#') Results
+    .small-2.columns
+      p
+        a(href='#', data-reveal-id='new-option').new-option-button.small.button.radius New option
+    .small-6.columns
+      h4.ranked-votes Your ranked votes
+  .row
+    .small-6.columns
+      #option-list
+    .small-6.columns
+      #option-list-yes
+      .option.remaining
+        p (unvoted)
+      #option-list-no
+  .reveal-modal.large#new-option
+    h4 New option
+    input(type='text', placeholder='Title')
+    textarea(placeholder='Add a new option')
+    p
+      a(href='#', data-reveal-id='new-option').new-option-button.small.button.radius Submit
