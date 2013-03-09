@@ -1,19 +1,18 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var ObjectId = Schema.ObjectId;
 
 module.exports.make = function make(Schema, mongoose) {
   var DecisionSchema = new Schema({
-    group: ObjectId,
-    starter: ObjectId,
+    group: Schema.Types.ObjectId,
+    starter: Schema.Types.ObjectId,
     title: String,
     description: String,
     created_at: Date,
     ends_at: Date,
-    options: [ObjectId],
-    votes: [ObjectId],
+    options: [Schema.Types.ObjectId],
+    votes: [Schema.Types.ObjectId],
     active: Boolean,
-    winner: ObjectId
+    winner: Schema.Types.ObjectId
   });
   return mongoose.model('Decision', DecisionSchema);
 }

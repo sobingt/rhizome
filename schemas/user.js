@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var ObjectId = Schema.ObjectId;
 
 module.exports.make = function make(Schema, mongoose) {
   var UserSchema = new Schema({
@@ -11,8 +10,8 @@ module.exports.make = function make(Schema, mongoose) {
     },
     password: String,
     name: String,
-    groups: [ObjectId],
-    votes: [ObjectId],
+    groups: [Schema.Types.ObjectId],
+    votes: [Schema.Types.ObjectId],
     created_at: Date,
     new: Boolean
   });

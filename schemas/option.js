@@ -1,17 +1,16 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var ObjectId = Schema.ObjectId;
 
 module.exports.make = function make(Schema, mongoose) {
   var OptionSchema = new Schema({
-    decision: ObjectId,
-    author: ObjectId,
+    decision: Schema.Types.ObjectId,
+    author: Schema.Types.ObjectId,
     title: String,
     content: String,
     created_at: Date,
-    arguments: [ObjectId],
-    parent: ObjectId,
-    children: [ObjectId]
+    arguments: [Schema.Types.ObjectId],
+    parent: Schema.Types.ObjectId,
+    children: [Schema.Types.ObjectId]
   });
   return mongoose.model('Option', OptionSchema);
 }

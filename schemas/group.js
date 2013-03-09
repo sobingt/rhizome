@@ -1,10 +1,9 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var ObjectId = Schema.ObjectId;
 
 module.exports.make = function make(Schema, mongoose) {
   var GroupSchema = new Schema({
-    members: [ObjectId],
+    members: [Schema.Types.ObjectId],
     name: String,
     description: String,
     created_at: Date

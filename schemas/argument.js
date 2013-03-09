@@ -1,14 +1,13 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var ObjectId = Schema.ObjectId;
 
 module.exports.make = function make(Schema, mongoose) {
   var ArgumentSchema = new Schema({
-    option: ObjectId,
-    author: ObjectId,
+    option: Schema.Types.ObjectId,
+    author: Schema.Types.ObjectId,
     content: String,
     created_at: Date,
-    supporters: [ObjectId]
+    supporters: [Schema.Types.ObjectId]
   });
   return mongoose.model('Argument', ArgumentSchema);
 }
