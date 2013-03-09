@@ -8,6 +8,7 @@ var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
   , decision = require('./routes/decision')
+  , option = require('./routes/option')
   , http = require('http')
   , path = require('path');
 
@@ -34,7 +35,11 @@ app.configure('development', function(){
 
 app.get('/', routes.index);
 app.get('/users', user.list);
-app.get('/decision', decision.main);
+app.get('/decision/:id', decision.view);
+app.get('/decision/:id/new.json', decision.new);
+app.get('/decision/:id/unvoted.json', decision.unvoted);
+app.get('/decision/:id/results.json', decision.results);
+app.get('/option/:id.json', option.view);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));

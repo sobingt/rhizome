@@ -1,6 +1,6 @@
 /* decision */
 
-var options;
+var options = {};
 
 $(document).ready(function() {
   loadOptions('unvoted');
@@ -45,14 +45,29 @@ $('.results-tab').on('click', function() {
   loadOptions('results');
 });
 
-/* load options */
+/* order can be 'new', 'unvoted' and 'results' */
 function loadOptions(order) {
-  $.getJSON('dev/' + order + '.json', function(data) {
-    options = data.options;
+  $.getJSON('/decision/1/' + order + '.json', function(optionList) {
     $('#option-list').empty();
-    $.each(data.options, function(i, option) {
-      makeVotableOption(option);
-      makeOptionModals(option);
+    $.each(optionList, function(i, id) {
+      if (id in options) {
+        if (order == 'results') {
+          makeResultOption(options[id], i+1);
+        } else {
+          makeVotableOption(options[id]);
+        }
+        makeOptionModals(options[id]);
+      } else {
+        $.getJSON('/option/' + id + '.json', function(option) {
+          options[id] = option;
+          if (order == 'results') {
+            makeResultOption(option);
+          } else {
+            makeVotableOption(option);
+          }
+          makeOptionModals(option);
+        });
+      }
     });
   });
 }
@@ -123,18 +138,20 @@ function voteNo(id) {
   }
 }
 
-function makeOption(option, isVotable) {
-  if (isVotable) {
-    buttonsHTML = '<div class=\"buttons\"><p><a href=\"#\" class=\"small success button radius vote-yes-button\">Yes</a></p><p><a href=\"#\" class=\"small alert button radius vote-no-button\">No</a></p></div>';
-  } else {
-    buttonsHTML = '';
-  }
+/* helper function for makeVotableOption and makeResultOption*/
+function makeOption(option, isVotable, count) {
   var optionHTML = '<div class=\"option\" id=\"' +
     option.id + '\"><span class=\"discussion-link\"><a href=\"#' + option.id + '\" data-reveal-id=\"discussion-' +
     option.id + '\">Discuss (' +
-    option.argument_count + ')</a></span>' +
-    buttonsHTML + '<div class=\"info\"><h5>' +
-    option.title + '</h5><p>';
+    option.argument_count + ')</a></span>';
+  if (isVotable) {
+    optionHTML += '<div class=\"buttons\"><p><a href=\"#\" class=\"small success button radius vote-yes-button\">Yes</a></p><p><a href=\"#\" class=\"small alert button radius vote-no-button\">No</a></p></div>';
+  }
+  optionHTML += '<div class=\"info\"><h5>';
+  if (!isVotable) {
+    optionHTML += count.toString() + '. ';
+  }
+  optionHTML += option.title + '</h5><p>';
   if (option.content.length > 120) {
     optionHTML += option.content.substring(0,120) + '... <a href=\"#\" data-reveal-id=\"content-' + option.id + '\">more</a>';
   } else {
@@ -145,11 +162,11 @@ function makeOption(option, isVotable) {
 }
 
 function makeVotableOption(option) {
-  makeOption(option, true);
+  makeOption(option, true, null);
 }
 
-function makeResultOption(option) {
-  makeOption(option, false);
+function makeResultOption(option, count) {
+  makeOption(option, false, count);
 }
 
 function makeOptionModals(option) {
@@ -174,9 +191,11 @@ function makeOptionModals(option) {
   }
 
   var argumentsHTML = '';
+  /*
   $.each(option.arguments, function(i, argument) {
     addArgument(argument);
   });
+  */
 
   // make discussion modal
   var discussionHTML = '<div id=\"discussion-' +

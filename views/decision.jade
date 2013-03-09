@@ -3,7 +3,7 @@ extends layout
 block content
   header.row
     .small-12.columns
-      img(src='img/logo.png').logo
+      img(src='/img/logo.png').logo
   .row
     .small-12.columns
       ul.breadcrumbs
@@ -32,13 +32,12 @@ block content
   .row
     .small-4.columns
       dl.sub-nav
-        dt Options:
         dd.new-tab
           a(href='#') New
         dd.unvoted-tab.active
           a(href='#') Unvoted
         dd.results-tab
-          a(href='#') Results
+          a(href='#') Partial results
     .small-2.columns
       p
         a(href='#', data-reveal-id='new-option').new-option-button.small.button.radius New option
