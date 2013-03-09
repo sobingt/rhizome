@@ -7,7 +7,6 @@ module.exports.make = function make(Schema, mongoose) {
     starter: Schema.Types.ObjectId,
     title: String,
     description: String,
-    created_at: Date,
     ends_at: Date,
     options: [Schema.Types.ObjectId],
     votes: [Schema.Types.ObjectId],

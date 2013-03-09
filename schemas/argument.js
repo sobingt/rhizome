@@ -6,7 +6,6 @@ module.exports.make = function make(Schema, mongoose) {
     option: Schema.Types.ObjectId,
     author: Schema.Types.ObjectId,
     content: String,
-    created_at: Date,
     supporters: [Schema.Types.ObjectId]
   });
   return mongoose.model('Argument', ArgumentSchema);

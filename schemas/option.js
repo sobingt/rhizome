@@ -7,7 +7,6 @@ module.exports.make = function make(Schema, mongoose) {
     author: Schema.Types.ObjectId,
     title: String,
     content: String,
-    created_at: Date,
     arguments: [Schema.Types.ObjectId],
     parent: Schema.Types.ObjectId,
     children: [Schema.Types.ObjectId]

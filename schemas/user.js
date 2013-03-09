@@ -12,7 +12,6 @@ module.exports.make = function make(Schema, mongoose) {
     name: String,
     groups: [Schema.Types.ObjectId],
     votes: [Schema.Types.ObjectId],
-    created_at: Date,
     new: Boolean
   });
   return mongoose.model('User', UserSchema);
