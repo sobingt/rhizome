@@ -3,7 +3,7 @@
 var options;
 
 $(document).ready(function() {
-  loadOptions();
+  loadOptions('unvoted');
   $('#option-list-yes').sortable({
     update: updateVotes
   });
@@ -24,10 +24,32 @@ $('#option-list').on('click', '.vote-no-button', function() {
   voteNo($(this).parents('.option:first').attr('id'));
 });
 
+$('.new-tab').on('click', function() {
+  $('.new-tab').addClass('active');
+  $('.unvoted-tab').removeClass('active');
+  $('.results-tab').removeClass('active');
+  loadOptions('new');
+});
+
+$('.unvoted-tab').on('click', function() {
+  $('.new-tab').removeClass('active');
+  $('.unvoted-tab').addClass('active');
+  $('.results-tab').removeClass('active');
+  loadOptions('unvoted');
+});
+
+$('.results-tab').on('click', function() {
+  $('.new-tab').removeClass('active');
+  $('.unvoted-tab').removeClass('active');
+  $('.results-tab').addClass('active');
+  loadOptions('results');
+});
+
 /* load options */
-function loadOptions() {
-  $.getJSON('dev/demo.json', function(data) {
+function loadOptions(order) {
+  $.getJSON('dev/' + order + '.json', function(data) {
     options = data.options;
+    $('#option-list').empty();
     $.each(data.options, function(i, option) {
       makeVotableOption(option);
       makeOptionModals(option);
