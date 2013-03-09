@@ -6,7 +6,8 @@ module.exports.make = function make(Schema, mongoose) {
     option: Schema.Types.ObjectId,
     author: Schema.Types.ObjectId,
     content: String,
-    supporters: [Schema.Types.ObjectId]
+    supporters: [Schema.Types.ObjectId],
+    replies: [Schema.Types.ObjectId]
   });
   return mongoose.model('Argument', ArgumentSchema);
 }
