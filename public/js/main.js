@@ -16,16 +16,16 @@ $(document).ready(function() {
   $(document).foundation();
 });
 
-$('#option-list').on('click', '.vote-yes-button', function() {
+$('#option-container').on('click', '.vote-yes-button', function() {
   voteYes($(this).parents('.option:first').attr('id'));
 });
 
-$('#option-list').on('click', '.vote-no-button', function() {
+$('#option-container').on('click', '.vote-no-button', function() {
   voteNo($(this).parents('.option:first').attr('id'));
 });
 
-$('.discussion-link').on('click', function() {
-  loadArguments(2);
+$('#option-container').on('click', '.discussion-link', function() {
+  loadArguments($(this).parents('.option:first').attr('id'));
 });
 
 $('.new-tab').on('click', function() {
