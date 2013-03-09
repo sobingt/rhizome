@@ -5,10 +5,10 @@ var options;
 $(document).ready(function() {
   loadOptions();
   $('#option-list-yes').sortable({
-    update: updateYesVotes
+    update: updateVotes
   });
   $('#option-list-no').sortable({
-    update: updateNoVotes
+    update: updateVotes
   });
   $('#option-list-yes li').disableSelection();
   $('#option-list-no li').disableSelection();
@@ -29,18 +29,89 @@ function loadOptions() {
   $.getJSON('dev/demo.json', function(data) {
     options = data.options;
     $.each(data.options, function(i, option) {
-      addOptionToList(option);
-      addOptionModals(option);
+      makeVotableOption(option);
+      makeOptionModals(option);
     });
   });
 }
 
-function addOptionToList(option) {
-  // add to option list
+/* update votes */
+function updateVotes(event, ui) {
+  var optionListYes = $('#option-list-yes').sortable('toArray');
+  var optionListNo = $('#option-list-no').sortable('toArray');
+  console.log(optionListYes);
+  console.log(optionListNo);
+}
+
+/* vote semaphore */
+var voteBlocked = false;
+
+function blockVote() {
+  voteBlocked = true;
+  window.setTimeout(function() {
+    voteBlocked = false;
+  }, 1000);
+}
+
+function voteYes(id) {
+  if (!voteBlocked) {
+    blockVote();
+    $.each(options, function(i, option) {
+      if (option.id == id) {
+        $('.option#' + id).fadeOut(200);
+        var optionHTML = '<div class=\"option yes\" id=\"' +
+          option.id + '\"><p class=\"discussion-link\"><a href=\"#\" data-reveal-id=\"discussion-' +
+          option.id + '\">Discuss (' +
+          option.argument_count + ')</a></p><div class=\"info\"><h5>' +
+          option.title + '</h5><p>';
+        if (option.content.length > 150) {
+          optionHTML += option.content.substring(0,150) + '... <a href=\"#\" data-reveal-id=\"text-' + option.id + '\">more</a>';
+        } else {
+          optionHTML += option.content;
+        }
+        optionHTML += '</p></div></div>';
+        $(optionHTML).hide().appendTo('#option-list-yes').show(500);
+      }
+    });
+    updateVotes();
+  }
+}
+
+function voteNo(id) {
+  if (!voteBlocked) {
+    blockVote();
+    $.each(options, function(i, option) {
+      if (option.id == id) {
+        $('.option#' + id).fadeOut(200);
+        var optionHTML = '<div class=\"option no\" id=\"' +
+          option.id + '\"><p class=\"discussion-link\"><a href=\"#\" data-reveal-id=\"discussion-' +
+          option.id + '\">Discuss (' +
+          option.argument_count + ')</a></p><div class=\"info\"><h5>' +
+          option.title + '</h5><p>';
+        if (option.content.length > 150) {
+          optionHTML += option.content.substring(0,150) + '... <a href=\"#\" data-reveal-id=\"content-' + option.id + '\">more</a>';
+        } else {
+          optionHTML += option.content;
+        }
+        optionHTML += '</p></div></div>';
+        $(optionHTML).hide().appendTo('#option-list-no').show(500);
+      }
+    });
+    updateVotes();
+  }
+}
+
+function makeOption(option, isVotable) {
+  if (isVotable) {
+    buttonsHTML = '<div class=\"buttons\"><p><a href=\"#\" class=\"small success button radius vote-yes-button\">Yes</a></p><p><a href=\"#\" class=\"small alert button radius vote-no-button\">No</a></p></div>';
+  } else {
+    buttonsHTML = '';
+  }
   var optionHTML = '<div class=\"option\" id=\"' +
     option.id + '\"><span class=\"discussion-link\"><a href=\"#' + option.id + '\" data-reveal-id=\"discussion-' +
     option.id + '\">Discuss (' +
-    option.argument_count + ')</a></span><div class=\"buttons\"><p><a href=\"#\" class=\"small success button radius vote-yes-button\">Yes</a></p><p><a href=\"#\" class=\"small alert button radius vote-no-button\">No</a></p></div><div class=\"info\"><h5>' +
+    option.argument_count + ')</a></span>' +
+    buttonsHTML + '<div class=\"info\"><h5>' +
     option.title + '</h5><p>';
   if (option.content.length > 120) {
     optionHTML += option.content.substring(0,120) + '... <a href=\"#\" data-reveal-id=\"content-' + option.id + '\">more</a>';
@@ -51,8 +122,16 @@ function addOptionToList(option) {
   $(optionHTML).appendTo('#option-list');
 }
 
-function addOptionModals(option) {
-  // add content modal
+function makeVotableOption(option) {
+  makeOption(option, true);
+}
+
+function makeResultOption(option) {
+  makeOption(option, false);
+}
+
+function makeOptionModals(option) {
+  // make content modal
   var contentHTML = '<div id=\"content-' +
     option.id + '\" class=\"reveal-modal large\"><h4>' +
     option.title + '</h4><dl class=\"sub-nav\"><dd class=\"active\"><dd class=\"active\"><a href=\"#\">Content</a></dd><dd><a href=\"#\" data-reveal-id=\"discussion-' +
@@ -77,7 +156,7 @@ function addOptionModals(option) {
     addArgument(argument);
   });
 
-  // add discussion modal
+  // make discussion modal
   var discussionHTML = '<div id=\"discussion-' +
     option.id + '\" class=\"reveal-modal large\"><h4>' +
     option.title + '</h4><dl class=\"sub-nav\"><dd class=\"active\"><dd><a href=\"#\" data-reveal-id=\"content-' +
@@ -85,69 +164,4 @@ function addOptionModals(option) {
     option.argument_count + ')</a></dd></dl><ul class=\"argument-list\">' +
     argumentsHTML + '</ul><textarea class=\"new-argument-input\" placeholder=\"Write an argument\"></textarea><a href=\"#\" class=\"small button radius new-argument-button\">Submit</a><a class=\"close-reveal-modal\">&#215;</a></div>';
   $(discussionHTML).appendTo('body');
-}
-
-/* update votes */
-function updateYesVotes(event, ui) {
-  //alert(ui.item.index());
-}
-
-function updateNoVotes(event, ui) {
-  //alert(ui.item.index());
-}
-
-/* vote semaphore */
-var voteBlocked = false;
-
-function blockVote() {
-  voteBlocked = true;
-  window.setTimeout(function() {
-    voteBlocked = false;
-  }, 1000);
-}
-
-/* vote yes */
-function voteYes(id) {
-    if (!voteBlocked) {
-      blockVote();
-      $.each(options, function(i, option) {
-        if (option.id == id) {
-          $('.option#' + id).fadeOut(200);
-          var optionHTML = '<div class=\"option yes\"><p class=\"discussion-link\"><a href=\"#\" data-reveal-id=\"discussion-' +
-            option.id + '\">Discuss (' +
-            option.argument_count + ')</a></p><div class=\"info\"><h5>' +
-            option.title + '</h5><p>';
-          if (option.content.length > 150) {
-            optionHTML += option.content.substring(0,150) + '... <a href=\"#\" data-reveal-id=\"text-' + option.id + '\">more</a>';
-          } else {
-            optionHTML += option.content;
-          }
-          optionHTML += '</p></div></div>';
-          $(optionHTML).hide().appendTo('#option-list-yes').show(500);
-        }
-      });
-    }
-}
-
-/* vote no */
-function voteNo(id) {
-    if (!voteBlocked) {
-      blockVote();
-      $.each(options, function(i, option) {
-        if (option.id == id) {
-          $('.option#' + id).fadeOut(200);
-          var optionHTML = '<div class=\"option no\"><p class=\"discussion-link\"><a href=\"#\" data-reveal-id=\"discussion-' +
-            option.id + '\">Discuss (' +
-            option.argument_count + ')</a></p><div class=\"info\"><h5>' +
-            option.title + '</h5><p>';
-          if (option.content.length > 150) {
-            optionHTML += option.content.substring(0,150) + '... <a href=\"#\" data-reveal-id=\"content-' + option.id + '\">more</a>';
-          } else {
-            optionHTML += option.content;
-          }
-          optionHTML += '</p></div></div>';
-          $(optionHTML).hide().appendTo('#option-list-no').show(500);
-        }
-      });
-    }
 }
