@@ -10,24 +10,24 @@ exports.view = function(req, res){
 exports.new = function(req, res){
   res.json({
     order: [1, 2, 3],
-    options: req.query['options'] == undefined ? [] : getDecisionOptions(req.params.id)
+    options: req.query['options'] == undefined ? [] : getOptions(req.params.id)
   });
 };
 
 exports.unvoted = function(req, res){
   res.json({
     order: [2, 3, 1],
-    options: req.query['options'] == undefined ? [] : getDecisionOptions(req.params.id)
+    options: req.query['options'] == undefined ? [] : getOptions(req.params.id)
   });
 };
 
 exports.results = function(req, res){
   res.json({
     order: [3, 1, 2],
-    options: req.query['options'] == undefined ? [] : getDecisionOptions(req.params.id)
+    options: req.query['options'] == undefined ? [] : getOptions(req.params.id)
   });
 };
 
-function getDecisionOptions(id) {
+function getOptions(ids, decision) {
   return [{id: 1, title: 'Option 1', content: 'Content 1 loaded from first', argument_count: 0}, {id: 2, title: 'Option 2', content: 'Content 2 loaded from first', argument_count: 0}];
 }
