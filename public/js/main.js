@@ -3,7 +3,7 @@
 var options = {};
 
 $(document).ready(function() {
-  loadOptions('unvoted');
+  loadOptions('unvoted', true);
   $('#option-list-yes').sortable({
     update: updateVotes
   });
@@ -28,28 +28,31 @@ $('.new-tab').on('click', function() {
   $('.new-tab').addClass('active');
   $('.unvoted-tab').removeClass('active');
   $('.results-tab').removeClass('active');
-  loadOptions('new');
+  loadOptions('new', false);
 });
 
 $('.unvoted-tab').on('click', function() {
   $('.new-tab').removeClass('active');
   $('.unvoted-tab').addClass('active');
   $('.results-tab').removeClass('active');
-  loadOptions('unvoted');
+  loadOptions('unvoted', false);
 });
 
 $('.results-tab').on('click', function() {
   $('.new-tab').removeClass('active');
   $('.unvoted-tab').removeClass('active');
   $('.results-tab').addClass('active');
-  loadOptions('results');
+  loadOptions('results', false);
 });
 
 /* order can be 'new', 'unvoted' and 'results' */
-function loadOptions(order) {
-  $.getJSON('/decision/1/' + order + '.json', function(optionList) {
+function loadOptions(order, getOptions) {
+  $.getJSON(getOptions ? '/decision/1/' + order + '.json?options' : '/decision/1/' + order + '.json', function(data) {
     $('#option-list').empty();
-    $.each(optionList, function(i, id) {
+    $.each(data.options, function(i, option) {
+      options[option.id] = option;
+    });
+    $.each(data.order, function(i, id) {
       if (id in options) {
         if (order == 'results') {
           makeResultOption(options[id], i+1);
