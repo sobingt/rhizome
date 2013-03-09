@@ -4,6 +4,7 @@
  */
 
 var express = require('express')
+  , models = require('./schemas/models')
   , routes = require('./routes')
   , user = require('./routes/user')
   , decision = require('./routes/decision')

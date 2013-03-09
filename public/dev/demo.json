@@ -9,18 +9,18 @@
         {
           "id": "1.",
           "timestamp": "February 14th 2010, 3:25:50 pm",
-          "text": "Lorem ipsum",
+          "content": "Lorem ipsum",
           "replies": [
             {
               "id": "1.1.",
               "timestamp": "February 14th 2010, 3:25:50 pm",
-              "text": "This is a reply",
+              "content": "This is a reply",
               "replies": []
             },
             {
               "id": "1.2.",
               "timestamp": "February 14th 2010, 3:25:50 pm",
-              "text": "This is another reply",
+              "content": "This is another reply",
               "replies": []
             }
           ]
@@ -28,7 +28,7 @@
         {
           "id": "2.",
           "timestamp": "February 14th 2010, 3:25:50 pm",
-          "text": "Another argument",
+          "content": "Another argument",
           "replies": []
         }
       ]
