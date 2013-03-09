@@ -24,6 +24,10 @@ $('#option-list').on('click', '.vote-no-button', function() {
   voteNo($(this).parents('.option:first').attr('id'));
 });
 
+$('.discussion-link').on('click', function() {
+  loadArguments(2);
+});
+
 $('.new-tab').on('click', function() {
   $('.new-tab').addClass('active');
   $('.unvoted-tab').removeClass('active');
@@ -47,7 +51,7 @@ $('.results-tab').on('click', function() {
 
 /* order can be 'new', 'unvoted' and 'results' */
 function loadOptions(order, getOptions) {
-  $.getJSON(getOptions ? '/decision/1/' + order + '.json?options' : '/decision/1/' + order + '.json', function(data) {
+  $.getJSON(getOptions ? '/decision/1/' + order + '?options' : '/decision/1/' + order, function(data) {
     $('#option-list').empty();
     $.each(data.options, function(i, option) {
       options[option.id] = option;
@@ -61,7 +65,7 @@ function loadOptions(order, getOptions) {
         }
         makeOptionModals(options[id]);
       } else {
-        $.getJSON('/option/' + id + '.json', function(option) {
+        $.getJSON('/option/' + id, function(option) {
           options[id] = option;
           if (order == 'results') {
             makeResultOption(option);
@@ -100,9 +104,9 @@ function voteYes(id) {
       if (option.id == id) {
         $('.option#' + id).fadeOut(200);
         var optionHTML = '<div class=\"option yes\" id=\"' +
-          option.id + '\"><p class=\"discussion-link\"><a href=\"#\" data-reveal-id=\"discussion-' +
+          option.id + '\"><span class=\"discussion-link\"><a href=\"#\" data-reveal-id=\"discussion-' +
           option.id + '\">Discuss (' +
-          option.argument_count + ')</a></p><div class=\"info\"><h5>' +
+          option.argument_count + ')</a></span><div class=\"info\"><h5>' +
           option.title + '</h5><p>';
         if (option.content.length > 150) {
           optionHTML += option.content.substring(0,150) + '... <a href=\"#\" data-reveal-id=\"text-' + option.id + '\">more</a>';
@@ -124,9 +128,9 @@ function voteNo(id) {
       if (option.id == id) {
         $('.option#' + id).fadeOut(200);
         var optionHTML = '<div class=\"option no\" id=\"' +
-          option.id + '\"><p class=\"discussion-link\"><a href=\"#\" data-reveal-id=\"discussion-' +
+          option.id + '\"><span class=\"discussion-link\"><a href=\"#\" data-reveal-id=\"discussion-' +
           option.id + '\">Discuss (' +
-          option.argument_count + ')</a></p><div class=\"info\"><h5>' +
+          option.argument_count + ')</a></span><div class=\"info\"><h5>' +
           option.title + '</h5><p>';
         if (option.content.length > 150) {
           optionHTML += option.content.substring(0,150) + '... <a href=\"#\" data-reveal-id=\"content-' + option.id + '\">more</a>';
@@ -144,7 +148,7 @@ function voteNo(id) {
 /* helper function for makeVotableOption and makeResultOption*/
 function makeOption(option, isVotable, count) {
   var optionHTML = '<div class=\"option\" id=\"' +
-    option.id + '\"><span class=\"discussion-link\"><a href=\"#' + option.id + '\" data-reveal-id=\"discussion-' +
+    option.id + '\"><span class=\"discussion-link\"><a href=\"#\" data-reveal-id=\"discussion-' +
     option.id + '\">Discuss (' +
     option.argument_count + ')</a></span>';
   if (isVotable) {
@@ -182,16 +186,6 @@ function makeOptionModals(option) {
     option.content + '</p><a class=\"close-reveal-modal\">&#215;</a></div>';
   $(contentHTML).appendTo('body');
 
-  function addArgument(argument) {
-    argumentsHTML += '<li><div class=\"argument\"><div class=\"buttons\"><a href=\"#\" class=\"tiny button radius success support-button\">Support</a> <a href=\"#\" class=\"tiny button radius promote-button\">Reply</a></div><span class=\"id\">' +
-      argument.id + '</span><span class=\"timestamp\">' +
-      argument.timestamp + '</span><p>' +
-      argument.content + '</p></div><ul>';
-    $.each(argument.replies, function(i, argument) {
-      addArgument(argument);
-    });
-    argumentsHTML += '</ul></li>';
-  }
 
   var argumentsHTML = '';
   /*
@@ -208,4 +202,24 @@ function makeOptionModals(option) {
     option.argument_count + ')</a></dd></dl><ul class=\"argument-list\">' +
     argumentsHTML + '</ul><textarea class=\"new-argument-input\" placeholder=\"Write an argument\"></textarea><a href=\"#\" class=\"small button radius new-argument-button\">Submit</a><a class=\"close-reveal-modal\">&#215;</a></div>';
   $(discussionHTML).appendTo('body');
+}
+
+function loadArguments(option) {
+  $('#discussion-' + option + ' .argument-list').empty();
+  $.getJSON('/option/1/arguments', function(arguments) {
+    $.each(arguments, function(i, reply) {
+      $(addArgument(reply, '', option)).appendTo('#discussion-' + option + ' .argument-list');
+    });
+  });
+}
+
+function addArgument(argument, argumentsHTML, option) {
+  argumentsHTML += '<li><div class=\"argument\"><div class=\"buttons\"><a href=\"#\" class=\"tiny button radius success support-button\">Support</a> <a href=\"#\" class=\"tiny button radius promote-button\">Reply</a></div><span class=\"id\">' +
+    argument.id + '</span><span class=\"timestamp\">' +
+    argument.timestamp + '</span><p>' +
+    argument.content + '</p></div><ul>';
+  $.each(argument.replies, function(i, reply) {
+    argumentsHTML = addArgument(reply, argumentsHTML, option);
+  });
+  return argumentsHTML + '</ul></li>';
 }

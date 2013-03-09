@@ -36,10 +36,11 @@ app.configure('development', function(){
 app.get('/', routes.index);
 app.get('/users', user.list);
 app.get('/decision/:id', decision.view);
-app.get('/decision/:id/new.json', decision.new);
-app.get('/decision/:id/unvoted.json', decision.unvoted);
-app.get('/decision/:id/results.json', decision.results);
-app.get('/option/:id.json', option.view);
+app.get('/decision/:id/new', decision.new);
+app.get('/decision/:id/unvoted', decision.unvoted);
+app.get('/decision/:id/results', decision.results);
+app.get('/option/:id', option.view);
+app.get('/option/:id/arguments', option.arguments);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
