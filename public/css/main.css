@@ -13,11 +13,7 @@ p, span {
 	color: #666;
 }
 header {
-	padding: 20px 0;
-}
-header .logo {
-	height: 20px;
-	width: auto;
+	padding-top: 20px;
 }
 
 /* -----------------------------------------
