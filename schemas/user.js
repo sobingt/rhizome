@@ -10,8 +10,8 @@ module.exports.make = function make(Schema, mongoose) {
     },
     password: String,
     name: String,
-    groups: [Schema.Types.ObjectId],
-    votes: [Schema.Types.ObjectId],
+    groups: [{ type: Schema.Types.ObjectId, ref: 'Group' }],
+    votes: [{ type: Schema.Types.ObjectId, ref: 'Vote' }],
     new: Boolean
   });
   return mongoose.model('User', UserSchema);

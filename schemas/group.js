@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 module.exports.make = function make(Schema, mongoose) {
   var GroupSchema = new Schema({
-    members: [Schema.Types.ObjectId],
+    members: [{ type: Schema.Types.ObjectId, ref: 'User' }],
     name: String,
     description: String
   });

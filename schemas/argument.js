@@ -3,11 +3,12 @@ var Schema = mongoose.Schema;
 
 module.exports.make = function make(Schema, mongoose) {
   var ArgumentSchema = new Schema({
-    option: Schema.Types.ObjectId,
-    author: Schema.Types.ObjectId,
+    option: { type: Schema.Types.ObjectId, ref: 'Option' },
+    author: { type: Schema.Types.ObjectId, ref: 'User' },
     content: String,
-    supporters: [Schema.Types.ObjectId],
-    replies: [Schema.Types.ObjectId]
+    supporters: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+    parent: { type: Schema.Types.ObjectId, ref: 'Argument' },
+    replies: [{ type: Schema.Types.ObjectId, ref: 'Argument' }]
   });
   return mongoose.model('Argument', ArgumentSchema);
 }
