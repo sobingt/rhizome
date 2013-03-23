@@ -10,7 +10,10 @@ var express = require('express')
   , decision = require('./routes/decision')
   , option = require('./routes/option')
   , http = require('http')
-  , path = require('path');
+  , path = require('path')
+  , bcrypt = require('bcrypt')
+  , passport = require('passport')
+  , LocalStrategy = require('passport-local').Strategy;
 
 var app = express();
 
@@ -24,6 +27,8 @@ app.configure(function(){
   app.use(express.methodOverride());
   app.use(express.cookieParser('your secret here'));
   app.use(express.session());
+  app.use(passport.initialize());
+  app.use(passport.session());
   app.use(app.router);
   app.use(require('stylus').middleware(__dirname + '/public'));
   app.use(express.static(path.join(__dirname, 'public')));
@@ -34,13 +39,47 @@ app.configure('development', function(){
 });
 
 app.get('/', routes.index);
-app.get('/users', user.list);
+app.get('/login', user.login);
+app.get('/register', user.register);
+app.post('/register', user.registerHandler);
 app.get('/decision/:id', decision.view);
 app.get('/decision/:id/new', decision.new);
 app.get('/decision/:id/unvoted', decision.unvoted);
 app.get('/decision/:id/results', decision.results);
 app.get('/option/:id', option.view);
 app.get('/option/:id/arguments', option.arguments);
+
+app.post('/login', 
+  passport.authenticate('local', { failureRedirect: '/login' }),
+  function(req, res) {
+    res.redirect('/');
+  });
+
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+    models.User.findOne({ email: username }, function (err, user) {
+      if (!user || !bcrypt.compareSync(password, user.password)) {
+        return done(null, false, { message: 'Incorrect email/password combination.' });
+      }
+      return done(null, user);
+    });
+  }
+));
+
+passport.serializeUser(function(user, done) {
+  done(null, user._id);
+});
+
+passport.deserializeUser(function(id, done) {
+  models.User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
+
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) { return next(); }
+  res.redirect('/login')
+}
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));

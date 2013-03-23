@@ -11,7 +11,7 @@ block content
           span Menu
     section.top-bar-section
       ul.right
-        li.divider.hide-for-small
+        li.divider
         li.has-dropdown
           a(href='#') Groups
           ul.dropdown
@@ -19,7 +19,7 @@ block content
               a(href='#') Casa Zimbabwe
             li
               a(href='#') UC Berkeley
-        li.divider.hide-for-small
+        li.divider
         li.has-dropdown
           a(href='#') Decisions
           ul.dropdown
@@ -31,12 +31,13 @@ block content
               label Ended
             li
               a(href='#') Who should be the President of CZ?
+        li.divider
 
   header.row
     .small-12.columns
       ul.breadcrumbs
         li
-          a(href='#') Home
+          a(href='#') World
         li
           a(href='#') USA
         li
@@ -79,6 +80,18 @@ block content
       .option.remaining
         p (unvoted)
       #option-list-no
+  hr
+  footer.row
+    .small-6.columns
+      span
+        | &copy; 2013 University of California, Berkeley &middot; 
+        a(href='#') New BSD License
+    .small-6.columns#menu
+      a(href='#') About
+      |  &middot; 
+      a(href='#') Methodology
+      |  &middot; 
+      a(href='#') Source code
   .reveal-modal.large#new-option
     h4 New option
     input(type='text', placeholder='Title')

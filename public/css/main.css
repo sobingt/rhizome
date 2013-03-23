@@ -9,11 +9,16 @@
 /* -----------------------------------------
    Shared Styles
 ----------------------------------------- */
-p, span {
+
+div p, div span {
 	color: #666;
 }
 header {
 	padding-top: 20px;
+}
+footer #menu {
+	padding-bottom: 20px;
+	text-align: right;
 }
 
 /* -----------------------------------------
