@@ -1,0 +1,16 @@
+extends layout
+
+block content
+	h2 Sign in
+	form(method='POST', action='/login')
+		p
+			span
+				label(for='username') Email
+				input(type='text', value='', name='username', placeholder='Email address')
+		p
+			span
+				label(for='password') Password
+				input(type='password', value='', name='password', placeholder='Password')
+		p
+			span
+				input(type='submit', value='Sign in')
