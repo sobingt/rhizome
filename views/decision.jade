@@ -1,38 +1,6 @@
 extends layout
 
 block content
-  nav.top-bar
-    ul.title-area
-      li.name
-        h1
-          a(href='#') Rhizome
-      li.toggle-topbar.menu-icon
-        a(href='#')
-          span Menu
-    section.top-bar-section
-      ul.right
-        li.divider
-        li.has-dropdown
-          a(href='#') Groups
-          ul.dropdown
-            li
-              a(href='#') Casa Zimbabwe
-            li
-              a(href='#') UC Berkeley
-        li.divider
-        li.has-dropdown
-          a(href='#') Decisions
-          ul.dropdown
-            li
-              label Active
-            li
-              a(href='#') What to do with the empty lot in Ridge?
-            li
-              label Ended
-            li
-              a(href='#') Who should be the President of CZ?
-        li.divider
-
   header.row
     .small-12.columns
       ul.breadcrumbs
@@ -80,18 +48,6 @@ block content
       .option.remaining
         p (unvoted)
       #option-list-no
-  hr
-  footer.row
-    .small-6.columns
-      span
-        | &copy; 2013 University of California, Berkeley &middot; 
-        a(href='#') New BSD License
-    .small-6.columns#menu
-      a(href='#') About
-      |  &middot; 
-      a(href='#') Methodology
-      |  &middot; 
-      a(href='#') Source code
   .reveal-modal.large#new-option
     h4 New option
     input(type='text', placeholder='Title')

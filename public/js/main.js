@@ -197,8 +197,8 @@ function loadArguments(option) {
 }
 
 function addArgument(argument, argumentsHTML, option) {
-  argumentsHTML += '<li><div class=\"argument\"><div class=\"buttons\"><a href=\"#\" class=\"tiny button radius success support-button\">Support</a> <a href=\"#\" class=\"tiny button radius promote-button\">Reply</a></div><span class=\"id\">' +
-    argument.id + '</span><span class=\"timestamp\">' +
+  argumentsHTML += '<li><div class=\"argument\"><div class=\"buttons\"><a href=\"#\" class=\"tiny button radius success support-button\">Support</a> <a href=\"#\" class=\"tiny button radius promote-button\">Reply</a></div><span class=\"author\">' +
+    argument.author + '</span><span class=\"timestamp\">' +
     argument.timestamp + '</span><p>' +
     argument.content + '</p></div><ul>';
   $.each(argument.replies, function(i, reply) {

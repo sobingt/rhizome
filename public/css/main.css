@@ -97,7 +97,7 @@ footer #menu {
 	float: right;
 	display: none;
 }
-.argument-list li .id {
+.argument-list li .author {
 	color: #000;
 	margin-right: 10px;
 }
