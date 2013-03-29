@@ -8,10 +8,10 @@ module.exports.make = function make(Schema, mongoose) {
     title: String,
     description: String,
     ends_at: Date,
-    options: [{ type: Schema.Types.ObjectId, ref: 'Option' }],
+    proposals: [{ type: Schema.Types.ObjectId, ref: 'Proposal' }],
     votes: [{ type: Schema.Types.ObjectId, ref: 'Vote' }],
     active: Boolean,
-    winner: { type: Schema.Types.ObjectId, ref: 'Option' }
+    winner: { type: Schema.Types.ObjectId, ref: 'Proposal' }
   });
   return mongoose.model('Decision', DecisionSchema);
 }

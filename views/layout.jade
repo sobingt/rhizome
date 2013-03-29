@@ -13,33 +13,39 @@ html
       ul.title-area
         li.name
           h1
-            a(href='#') Rhizome
+            a(href='/') Rhizome
         li.toggle-topbar.menu-icon
           a(href='#')
             span Menu
       section.top-bar-section
         ul.right
-          li.divider
-          li.has-dropdown
-            a(href='#') Groups
-            ul.dropdown
-              li
-                a(href='#') Casa Zimbabwe
-              li
-                a(href='#') UC Berkeley
-          li.divider
-          li.has-dropdown
-            a(href='#') Decisions
-            ul.dropdown
-              li
-                label Active
-              li
-                a(href='#') What to do with the empty lot in Ridge?
-              li
-                label Ended
-              li
-                a(href='#') Who should be the President of CZ?
-          li.divider
+          if user
+            li.divider
+            li.has-dropdown
+              a(href='#') Groups
+              ul.dropdown
+                li
+                  label Private
+                each group in user.groups
+                  li
+                    a(href='#')= group.name
+            li.divider
+            li.has-dropdown
+              a(href='#')= user.name
+              ul.dropdown
+                li
+                  label Profile
+                li
+                  a(href='/logout') Logout
+            li.divider
+          else
+            li.divider
+            li
+              a(href='/login') Sign in
+            li.divider
+            li
+              a(href='/register') Register
+            li.divider
     block content
     hr
     footer.row

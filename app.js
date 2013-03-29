@@ -9,7 +9,7 @@ var express = require('express')
   , user = require('./routes/user')
   , group = require('./routes/group')
   , decision = require('./routes/decision')
-  , option = require('./routes/option')
+  , proposal = require('./routes/proposal')
   , http = require('http')
   , path = require('path')
   , bcrypt = require('bcrypt')
@@ -50,14 +50,18 @@ app.get('/decision/:id', decision.view);
 app.get('/decision/:id/new', decision.new);
 app.get('/decision/:id/unvoted', decision.unvoted);
 app.get('/decision/:id/results', decision.results);
-app.get('/option/:id', option.view);
-app.get('/option/:id/arguments', option.arguments);
+app.get('/proposal/:id', proposal.view);
+app.get('/proposal/:id/arguments', proposal.arguments);
 
 app.post('/login', 
   passport.authenticate('local', { failureRedirect: '/login' }),
   function(req, res) {
     res.redirect('/');
   });
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
@@ -75,14 +79,24 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(id, done) {
-  models.User.findById(id, function(err, user) {
-    done(err, user);
+  models.User
+  .findById(id)
+  .populate('groups', '_id name')
+  .exec(function (err, user) {
+    var exposedUser = null;
+    if (user) {
+      exposedUser = {
+        name: user.name,
+        groups: user.groups
+      }
+    }
+    done(err, exposedUser);
   });
 });
 
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
-  res.redirect('/login')
+  res.redirect('/login');
 }
 
 http.createServer(app).listen(app.get('port'), function(){

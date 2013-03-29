@@ -1,78 +1,78 @@
 /* decision */
 
-var options = {};
+var proposals = {};
 
 $(document).ready(function() {
-  loadOptions('unvoted', true);
-  $('#option-list-yes').sortable({
+  loadProposals('unvoted', true);
+  $('#proposal-list-yes').sortable({
     update: updateVotes
   });
-  $('#option-list-no').sortable({
+  $('#proposal-list-no').sortable({
     update: updateVotes
   });
-  $('#option-list-yes li').disableSelection();
-  $('#option-list-no li').disableSelection();
+  $('#proposal-list-yes li').disableSelection();
+  $('#proposal-list-no li').disableSelection();
 
   $(document).foundation();
 });
 
-$('#option-container').on('click', '.vote-yes-button', function() {
-  vote($(this).parents('.option:first').attr('id'), 'yes');
+$('#proposal-container').on('click', '.vote-yes-button', function() {
+  vote($(this).parents('.proposal:first').attr('id'), 'yes');
 });
 
-$('#option-container').on('click', '.vote-no-button', function() {
-  vote($(this).parents('.option:first').attr('id'), 'no');
+$('#proposal-container').on('click', '.vote-no-button', function() {
+  vote($(this).parents('.proposal:first').attr('id'), 'no');
 });
 
-$('#option-container').on('click', '.discussion-link', function() {
-  loadArguments($(this).parents('.option:first').attr('id'));
+$('#proposal-container').on('click', '.discussion-link', function() {
+  loadArguments($(this).parents('.proposal:first').attr('id'));
 });
 
 $('.new-tab').on('click', function() {
   $('.new-tab').addClass('active');
   $('.unvoted-tab').removeClass('active');
   $('.results-tab').removeClass('active');
-  loadOptions('new', false);
+  loadProposals('new', false);
 });
 
 $('.unvoted-tab').on('click', function() {
   $('.new-tab').removeClass('active');
   $('.unvoted-tab').addClass('active');
   $('.results-tab').removeClass('active');
-  loadOptions('unvoted', false);
+  loadProposals('unvoted', false);
 });
 
 $('.results-tab').on('click', function() {
   $('.new-tab').removeClass('active');
   $('.unvoted-tab').removeClass('active');
   $('.results-tab').addClass('active');
-  loadOptions('results', false);
+  loadProposals('results', false);
 });
 
 /* order can be 'new', 'unvoted' and 'results' */
-function loadOptions(order, getOptions) {
-  $.getJSON(getOptions ? '/decision/1/' + order + '?options' : '/decision/1/' + order, function(data) {
-    $('#option-list').empty();
-    $.each(data.options, function(i, option) {
-      options[option.id] = option;
+function loadProposals(order, getProposals) {
+  $.getJSON(getProposals ? '/decision/1/' + order + '?proposals' : '/decision/1/' + order, function(data) {
+    $('#proposal-list').empty();
+    $.each(data.proposals, function(i, proposal) {
+      proposals[proposal.id] = proposal;
     });
     $.each(data.order, function(i, id) {
-      if (id in options) {
+      if (id in proposals) {
         if (order == 'results') {
-          $(makeResultOption(options[id], i+1)).appendTo('#option-list');
+          $(makeResultProposal(proposals[id], i+1)).appendTo('#proposal-list');
         } else {
-          $(makeVotableOption(options[id])).appendTo('#option-list');
+          $(makeVotableProposal(proposals[id])).appendTo('#proposal-list');
         }
-        addOptionModals(options[id]);
+        addProposalModals(proposals[id]);
       } else {
-        $.getJSON('/option/' + id, function(option) {
-          options[id] = option;
+        $.getJSON('/proposal/' + id, function(proposal) {
+          proposals[id] = proposal;
           if (order == 'results') {
-            $(makeResultOption(option)).appendTo('#option-list');
+            $(makeResultProposal(proposal)).appendTo('#proposal-list');
           } else {
-            $(makeVotableOption(option)).appendTo('#option-list');
+            $(makeVotableProposal(proposal)).appendTo('#proposal-list');
           }
-          addOptionModals(option);
+          addProposalModals(proposal);
         });
       }
     });
@@ -81,10 +81,10 @@ function loadOptions(order, getOptions) {
 
 /* update votes */
 function updateVotes(event, ui) {
-  var optionListYes = $('#option-list-yes').sortable('toArray');
-  var optionListNo = $('#option-list-no').sortable('toArray');
-  console.log(optionListYes);
-  console.log(optionListNo);
+  var proposalListYes = $('#proposal-list-yes').sortable('toArray');
+  var proposalListNo = $('#proposal-list-no').sortable('toArray');
+  console.log(proposalListYes);
+  console.log(proposalListNo);
 }
 
 /* vote semaphore */
@@ -101,10 +101,10 @@ function blockVote() {
 function vote(id, choice) {
   if (!voteBlocked) {
     blockVote();
-    $.each(options, function(i, option) {
-      if (option.id == id) {
-        $('.option#' + id).fadeOut(200);
-        $(makeVotedOption(option, choice)).hide().appendTo('#option-list-' + choice).show(500);
+    $.each(proposals, function(i, proposal) {
+      if (proposal.id == id) {
+        $('.proposal#' + id).fadeOut(200);
+        $(makeVotedProposal(proposal, choice)).hide().appendTo('#proposal-list-' + choice).show(500);
       }
     });
     updateVotes();
@@ -112,97 +112,97 @@ function vote(id, choice) {
 }
 
 /* choice is 'yes' or 'no' */
-function makeVotedOption(option, choice) {
-  var optionHTML = '<div class=\"option ' +
+function makeVotedProposal(proposal, choice) {
+  var proposalHTML = '<div class=\"proposal ' +
     choice + '\" id=\"' +
-    option.id + '\"><span class=\"discussion-link\"><a href=\"#\" data-reveal-id=\"discussion-' +
-    option.id + '\">Discuss (' +
-    option.argument_count + ')</a></span><div class=\"info\"><h5>' +
-    option.title + '</h5><p>';
-  if (option.content.length > 150) {
-    optionHTML += option.content.substring(0,150) + '... <a href=\"#\" data-reveal-id=\"text-' + option.id + '\">more</a>';
+    proposal.id + '\"><span class=\"discussion-link\"><a href=\"#\" data-reveal-id=\"discussion-' +
+    proposal.id + '\">Discuss (' +
+    proposal.argument_count + ')</a></span><div class=\"info\"><h5>' +
+    proposal.title + '</h5><p>';
+  if (proposal.content.length > 150) {
+    proposalHTML += proposal.content.substring(0,150) + '... <a href=\"#\" data-reveal-id=\"text-' + proposal.id + '\">more</a>';
   } else {
-    optionHTML += option.content;
+    proposalHTML += proposal.content;
   }
-  optionHTML += '</p></div></div>';
-  return optionHTML;
+  proposalHTML += '</p></div></div>';
+  return proposalHTML;
 }
 
-/* helper function for makeVotableOption and makeResultOption*/
-function makeOption(option, isVotable, count) {
-  var optionHTML = '<div class=\"option\" id=\"' +
-    option.id + '\"><span class=\"discussion-link\"><a href=\"#\" data-reveal-id=\"discussion-' +
-    option.id + '\">Discuss (' +
-    option.argument_count + ')</a></span>';
+/* helper function for makeVotableProposal and makeResultProposal*/
+function makeProposal(proposal, isVotable, count) {
+  var proposalHTML = '<div class=\"proposal\" id=\"' +
+    proposal.id + '\"><span class=\"discussion-link\"><a href=\"#\" data-reveal-id=\"discussion-' +
+    proposal.id + '\">Discuss (' +
+    proposal.argument_count + ')</a></span>';
   if (isVotable) {
-    optionHTML += '<div class=\"buttons\"><p><a href=\"#\" class=\"small success button radius vote-yes-button\">Yes</a></p><p><a href=\"#\" class=\"small alert button radius vote-no-button\">No</a></p></div>';
+    proposalHTML += '<div class=\"buttons\"><p><a href=\"#\" class=\"small success button radius vote-yes-button\">Yes</a></p><p><a href=\"#\" class=\"small alert button radius vote-no-button\">No</a></p></div>';
   }
-  optionHTML += '<div class=\"info\"><h5>';
+  proposalHTML += '<div class=\"info\"><h5>';
   if (!isVotable) {
-    optionHTML += count.toString() + '. ';
+    proposalHTML += count.toString() + '. ';
   }
-  optionHTML += option.title + '</h5><p>';
-  if (option.content.length > 120) {
-    optionHTML += option.content.substring(0,120) + '... <a href=\"#\" data-reveal-id=\"content-' + option.id + '\">more</a>';
+  proposalHTML += proposal.title + '</h5><p>';
+  if (proposal.content.length > 120) {
+    proposalHTML += proposal.content.substring(0,120) + '... <a href=\"#\" data-reveal-id=\"content-' + proposal.id + '\">more</a>';
   } else {
-    optionHTML += option.content;
+    proposalHTML += proposal.content;
   }
-  optionHTML += '</p></div></div>';
-  return optionHTML;
+  proposalHTML += '</p></div></div>';
+  return proposalHTML;
 }
 
-function makeVotableOption(option) {
-  return makeOption(option, true, null);
+function makeVotableProposal(proposal) {
+  return makeProposal(proposal, true, null);
 }
 
-function makeResultOption(option, count) {
-  return makeOption(option, false, count);
+function makeResultProposal(proposal, count) {
+  return makeProposal(proposal, false, count);
 }
 
-function addOptionModals(option) {
+function addProposalModals(proposal) {
   // make content modal
   var contentHTML = '<div id=\"content-' +
-    option.id + '\" class=\"reveal-modal large\"><h4>' +
-    option.title + '</h4><dl class=\"sub-nav\"><dd class=\"active\"><dd class=\"active\"><a href=\"#\">Content</a></dd><dd><a href=\"#\" data-reveal-id=\"discussion-' +
-    option.id + '\">Discussion (' +
-    option.argument_count + ')</a></dd></dl><p>' +
-    option.content + '</p><a class=\"close-reveal-modal\">&#215;</a></div>';
+    proposal.id + '\" class=\"reveal-modal large\"><h4>' +
+    proposal.title + '</h4><dl class=\"sub-nav\"><dd class=\"active\"><dd class=\"active\"><a href=\"#\">Content</a></dd><dd><a href=\"#\" data-reveal-id=\"discussion-' +
+    proposal.id + '\">Discussion (' +
+    proposal.argument_count + ')</a></dd></dl><p>' +
+    proposal.content + '</p><a class=\"close-reveal-modal\">&#215;</a></div>';
   $(contentHTML).appendTo('body');
 
 
   var argumentsHTML = '';
   /*
-  $.each(option.arguments, function(i, argument) {
+  $.each(proposal.arguments, function(i, argument) {
     addArgument(argument);
   });
   */
 
   // make discussion modal
   var discussionHTML = '<div id=\"discussion-' +
-    option.id + '\" class=\"reveal-modal large\"><h4>' +
-    option.title + '</h4><dl class=\"sub-nav\"><dd class=\"active\"><dd><a href=\"#\" data-reveal-id=\"content-' +
-    option.id + '\">Content</a></dd><dd class=\"active\"><a href=\"#\">Discussion (' +
-    option.argument_count + ')</a></dd></dl><ul class=\"argument-list\">' +
+    proposal.id + '\" class=\"reveal-modal large\"><h4>' +
+    proposal.title + '</h4><dl class=\"sub-nav\"><dd class=\"active\"><dd><a href=\"#\" data-reveal-id=\"content-' +
+    proposal.id + '\">Content</a></dd><dd class=\"active\"><a href=\"#\">Discussion (' +
+    proposal.argument_count + ')</a></dd></dl><ul class=\"argument-list\">' +
     argumentsHTML + '</ul><textarea class=\"new-argument-input\" placeholder=\"Write an argument\"></textarea><a href=\"#\" class=\"small button radius new-argument-button\">Submit</a><a class=\"close-reveal-modal\">&#215;</a></div>';
   $(discussionHTML).appendTo('body');
 }
 
-function loadArguments(option) {
-  $('#discussion-' + option + ' .argument-list').empty();
-  $.getJSON('/option/1/arguments', function(arguments) {
+function loadArguments(proposal) {
+  $('#discussion-' + proposal + ' .argument-list').empty();
+  $.getJSON('/proposal/1/arguments', function(arguments) {
     $.each(arguments, function(i, reply) {
-      $(addArgument(reply, '', option)).appendTo('#discussion-' + option + ' .argument-list');
+      $(addArgument(reply, '', proposal)).appendTo('#discussion-' + proposal + ' .argument-list');
     });
   });
 }
 
-function addArgument(argument, argumentsHTML, option) {
+function addArgument(argument, argumentsHTML, proposal) {
   argumentsHTML += '<li><div class=\"argument\"><div class=\"buttons\"><a href=\"#\" class=\"tiny button radius success support-button\">Support</a> <a href=\"#\" class=\"tiny button radius promote-button\">Reply</a></div><span class=\"author\">' +
     argument.author + '</span><span class=\"timestamp\">' +
     argument.timestamp + '</span><p>' +
     argument.content + '</p></div><ul>';
   $.each(argument.replies, function(i, reply) {
-    argumentsHTML = addArgument(reply, argumentsHTML, option);
+    argumentsHTML = addArgument(reply, argumentsHTML, proposal);
   });
   return argumentsHTML + '</ul></li>';
 }

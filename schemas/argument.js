@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 module.exports.make = function make(Schema, mongoose) {
   var ArgumentSchema = new Schema({
-    option: { type: Schema.Types.ObjectId, ref: 'Option' },
+    proposal: { type: Schema.Types.ObjectId, ref: 'Proposal' },
     author: { type: Schema.Types.ObjectId, ref: 'User' },
     content: String,
     supporters: [{ type: Schema.Types.ObjectId, ref: 'User' }],

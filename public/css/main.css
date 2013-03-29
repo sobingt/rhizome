@@ -35,47 +35,47 @@ footer #menu {
 	line-height: 1.5em;
 }
 
-.option { background: #fff; border: solid 1px #e6e6e6; margin: 0 0 22px 0; padding: 0; min-height: 100px; -webkit-box-shadow: 0 1px 3px 0 #eee; }
-.option > :first-child { margin-top: 0; }
-.option > :last-child { margin-bottom: 0; }
-.option.callout { background: #2ba6cb; color: #fff; border-color: #2284a1; -webkit-box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.5); -moz-box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.5); box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.5); }
-.option.callout a { color: #fff; }
-.option.callout .button { background: white; border: none; color: #2ba6cb; text-shadow: none; }
-.option.callout .button:hover, .panel.callout .button:focus { background: rgba(255, 255, 255, 0.8); }
-.option.radius { -webkit-border-radius: 3px; -moz-border-radius: 3px; -ms-border-radius: 3px; -o-border-radius: 3px; border-radius: 3px; }
+.proposal { background: #fff; border: solid 1px #e6e6e6; margin: 0 0 22px 0; padding: 0; min-height: 100px; -webkit-box-shadow: 0 1px 3px 0 #eee; }
+.proposal > :first-child { margin-top: 0; }
+.proposal > :last-child { margin-bottom: 0; }
+.proposal.callout { background: #2ba6cb; color: #fff; border-color: #2284a1; -webkit-box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.5); -moz-box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.5); box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.5); }
+.proposal.callout a { color: #fff; }
+.proposal.callout .button { background: white; border: none; color: #2ba6cb; text-shadow: none; }
+.proposal.callout .button:hover, .panel.callout .button:focus { background: rgba(255, 255, 255, 0.8); }
+.proposal.radius { -webkit-border-radius: 3px; -moz-border-radius: 3px; -ms-border-radius: 3px; -o-border-radius: 3px; border-radius: 3px; }
 
-.option .buttons {
+.proposal .buttons {
 	float: left;
 	text-align: right;
 }
-.option .buttons p {
+.proposal .buttons p {
 	margin: 10px;
 	padding-right: 5px;
 }
-.option .buttons .button {
+.proposal .buttons .button {
 	width: 60px;
 	margin: 0;
 }
-.option .info {
+.proposal .info {
 	margin: 10px;
 }
-.option .info p {
+.proposal .info p {
 	margin: 0;
 }
-.option .discussion-link {
+.proposal .discussion-link {
 	float: right;
 	margin: 10px;
 }
-.option.yes, .option.no {
+.proposal.yes, .proposal.no {
 	min-height: 0;
 }
-.option.yes {
+.proposal.yes {
 	background-color: #efc;
 }
-.option.no {
+.proposal.no {
 	background-color: #fee;
 }
-.option.remaining {
+.proposal.remaining {
 	min-height: 0;
 	text-align: center;
 }
@@ -83,7 +83,7 @@ footer #menu {
 	float: right;
 	height: 80px;
 }
-.new-option-button {
+.new-proposal-button {
 	float: right;
 }
 .ranked-votes {
@@ -116,7 +116,7 @@ footer #menu {
 .new-argument-button {
 	float: right;
 }
-#new-option textarea {
+#new-proposal textarea {
 	height: 300px;
 }
 

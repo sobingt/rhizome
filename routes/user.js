@@ -2,11 +2,11 @@ var models = require('../schemas/models')
   , bcrypt = require('bcrypt');
 
 exports.login = function(req, res){
-  res.render('login', { title: 'Peer Library - Log in' });
+  res.render('login', { user: req.user, title: 'Sign in to Rhizome' });
 };
 
 exports.register = function(req, res){
-  res.render('register', { title: 'Peer Library Registration'});
+  res.render('register', { user: req.user, title: 'Register on Rhizome'});
 };
 
 exports.registerHandler = function(req, res){

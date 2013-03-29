@@ -4,7 +4,7 @@ var models = require('../schemas/models')
 exports.view = function(req, res){
   models.Group.findOne({ name: req.params.name }, function (err, group){
     if (group) {
-      res.render('group', { title: group.name, group: group });
+      res.render('group', { user: req.user, title: group.name, group: group });
     } else {
       res.send(404);
     }
@@ -13,7 +13,7 @@ exports.view = function(req, res){
 };
 
 exports.start = function(req, res){
-  res.render('group-start', { title: 'Start a new group' });
+  res.render('group-start', { user: req.user, title: 'Start a new group' });
 };
 
 exports.startHandler = function(req, res){
