@@ -45,7 +45,7 @@ app.get('/register', user.register);
 app.post('/register', user.registerHandler);
 app.get('/group/start', ensureAuthenticated, group.start);
 app.post('/group/start', ensureAuthenticated, group.startHandler);
-app.get('/group/:name', group.view);
+app.get('/group/:subdomain', group.view);
 app.get('/decision/:id', decision.view);
 app.get('/decision/:id/new', decision.new);
 app.get('/decision/:id/unvoted', decision.unvoted);

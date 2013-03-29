@@ -7,10 +7,17 @@ block content
       form(method='POST', action='/group/start')
         p
           label(for='title') Name
-            input(type='text', value='', name='name', placeholder='Name of the group')
+            input(type='text', value='', name='name', placeholder='Example: Berkeley Student Cooperative')
         p
           label(for='description') Description
-            input(type='text', value='', name='description', placeholder='Describe your group')
+            input(type='text', value='', name='description', placeholder='Example: Student housing cooperative at UC Berkeley')
+        div
+          label(for='subdomain') Subdomain
+            .row.collapse
+              .small-6.columns
+                input(type='text', value='', name='subdomain', placeholder='Example: berkeleycoop')
+              .small-6.columns
+                span.postfix .rhizome.domain
         p
           label(for='emails') Emails of members, separated by commas
             textarea(value='', name='emails', placeholder='Example: rose@gmail.com, sagan@nasa.gov, zizek@princeton.edu')
