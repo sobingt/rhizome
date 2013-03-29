@@ -81,7 +81,7 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(id, done) {
   models.User
   .findById(id)
-  .populate('groups', '_id name')
+  .populate('groups', 'name subdomain')
   .exec(function (err, user) {
     var exposedUser = null;
     if (user) {

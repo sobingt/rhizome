@@ -28,7 +28,7 @@ html
                   label Private
                 each group in user.groups
                   li
-                    a(href='#')= group.name
+                    a(href='/group/' + group.subdomain)= group.name
             li.divider
             li.has-dropdown
               a(href='#')= user.name
