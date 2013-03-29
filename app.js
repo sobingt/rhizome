@@ -7,6 +7,7 @@ var express = require('express')
   , models = require('./schemas/models')
   , routes = require('./routes')
   , user = require('./routes/user')
+  , group = require('./routes/group')
   , decision = require('./routes/decision')
   , option = require('./routes/option')
   , http = require('http')
@@ -42,6 +43,9 @@ app.get('/', routes.index);
 app.get('/login', user.login);
 app.get('/register', user.register);
 app.post('/register', user.registerHandler);
+app.get('/group/start', ensureAuthenticated, group.start);
+app.post('/group/start', ensureAuthenticated, group.startHandler);
+app.get('/group/:name', group.view);
 app.get('/decision/:id', decision.view);
 app.get('/decision/:id/new', decision.new);
 app.get('/decision/:id/unvoted', decision.unvoted);

@@ -50,8 +50,13 @@ block content
       #option-list-no
   .reveal-modal.large#new-option
     h4 New option
-    input(type='text', placeholder='Title')
-    textarea(placeholder='Add a new option')
+    label
+    p
+      label(for='title') Title
+        input(type='text', placeholder='Title')
+    p
+      label(for='option') Option
+        textarea(placeholder='Propose an option')
     p
       a(href='#', data-reveal-id='new-option').new-option-button.small.button.radius Submit
 

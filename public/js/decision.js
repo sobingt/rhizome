@@ -111,7 +111,7 @@ function vote(id, choice) {
   }
 }
 
-/* choie is 'yes' or 'no' */
+/* choice is 'yes' or 'no' */
 function makeVotedOption(option, choice) {
   var optionHTML = '<div class=\"option ' +
     choice + '\" id=\"' +

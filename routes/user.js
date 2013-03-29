@@ -17,7 +17,9 @@ exports.registerHandler = function(req, res){
     email_verified: false,
     password: bcrypt.hashSync(req.body.password, salt),
     salt: salt,
-    name: req.body.name
+    name: req.body.name,
+    groups: [],
+    votes: []
   });
 
   user.save(function (err) {

@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  header.row
+    .small-6.small-centered.columns
+      h3 Start a new group
+      form(method='POST', action='/group/start')
+        p
+          label(for='title') Name
+            input(type='text', value='', name='name', placeholder='Name of the group')
+        p
+          label(for='description') Description
+            input(type='text', value='', name='description', placeholder='Describe your group')
+        p
+          label(for='emails') Emails of members, separated by commas
+            textarea(value='', name='emails', placeholder='Example: rose@gmail.com, sagan@nasa.gov, zizek@princeton.edu')
+        p
+          input(type='submit', value='Submit')
