@@ -21,7 +21,11 @@ footer #menu {
 	text-align: right;
 }
 
-.panel { background: #fff; border: solid 1px #e6e6e6; margin: 0 0 22px 0; padding: 0; min-height: 100px; -webkit-box-shadow: 0 1px 3px 0 #eee; }
+.center {
+	text-align: center;
+}
+
+.panel { background: #fff; border: solid 1px #e6e6e6; margin: 0 0 22px 0; padding: 0; -webkit-box-shadow: 0 1px 3px 0 #eee; }
 .panel > :first-child { margin-top: 0; }
 .panel > :last-child { margin-bottom: 0; }
 .panel.callout { background: #2ba6cb; color: #fff; border-color: #2284a1; -webkit-box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.5); -moz-box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.5); box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.5); }
@@ -29,6 +33,24 @@ footer #menu {
 .panel.callout .button { background: white; border: none; color: #2ba6cb; text-shadow: none; }
 .panel.callout .button:hover, .panel.callout .button:focus { background: rgba(255, 255, 255, 0.8); }
 .panel.radius { -webkit-border-radius: 3px; -moz-border-radius: 3px; -ms-border-radius: 3px; -o-border-radius: 3px; border-radius: 3px; }
+.panel .buttons {
+	float: left;
+	text-align: right;
+}
+.panel .buttons p {
+	margin: 10px;
+	padding-right: 5px;
+}
+.panel .buttons .button {
+	width: 60px;
+	margin: 0;
+}
+.panel .info {
+	margin: 10px;
+}
+.panel .info p {
+	margin: 0;
+}
 
 /* -----------------------------------------
    Decision
@@ -44,29 +66,14 @@ footer #menu {
 	line-height: 1.5em;
 }
 
-.proposal.panel .buttons {
-	float: left;
-	text-align: right;
-}
-.proposal.panel .buttons p {
-	margin: 10px;
-	padding-right: 5px;
-}
-.proposal.panel .buttons .button {
-	width: 60px;
-	margin: 0;
-}
-.proposal.panel .info {
-	margin: 10px;
-}
-.proposal.panel .info p {
-	margin: 0;
+.proposal.panel {
+	min-height: 100px;
 }
 .proposal.panel .discussion-link {
 	float: right;
 	margin: 10px;
 }
-.proposal.panel.yes, .proposal.no {
+.proposal.panel.yes, .proposal.panel.no {
 	min-height: 0;
 }
 .proposal.panel.yes {
@@ -79,15 +86,13 @@ footer #menu {
 	min-height: 0;
 	text-align: center;
 }
+
 .qr-code {
 	float: right;
 	height: 80px;
 }
 .new-proposal-button {
 	float: right;
-}
-.ranked-votes {
-	text-align: center;
 }
 
 .argument-list li {

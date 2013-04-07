@@ -2,6 +2,14 @@ extends layout
 
 block content
   header.row
-    .small-12.small-centered.columns
-      h3= group.name
+    .small-8.columns
+      h4= group.name
       p= group.description
+      h4.center Ongoing decisions
+      .panel
+        .buttons
+          p
+            a(href='/decision/').small.button.radius Vote
+        .info
+          h5 What to do with the parking lot on Ridge?
+          p Hello
