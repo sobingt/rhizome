@@ -21,6 +21,15 @@ footer #menu {
 	text-align: right;
 }
 
+.panel { background: #fff; border: solid 1px #e6e6e6; margin: 0 0 22px 0; padding: 0; min-height: 100px; -webkit-box-shadow: 0 1px 3px 0 #eee; }
+.panel > :first-child { margin-top: 0; }
+.panel > :last-child { margin-bottom: 0; }
+.panel.callout { background: #2ba6cb; color: #fff; border-color: #2284a1; -webkit-box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.5); -moz-box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.5); box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.5); }
+.panel.callout a { color: #fff; }
+.panel.callout .button { background: white; border: none; color: #2ba6cb; text-shadow: none; }
+.panel.callout .button:hover, .panel.callout .button:focus { background: rgba(255, 255, 255, 0.8); }
+.panel.radius { -webkit-border-radius: 3px; -moz-border-radius: 3px; -ms-border-radius: 3px; -o-border-radius: 3px; border-radius: 3px; }
+
 /* -----------------------------------------
    Decision
 ----------------------------------------- */
@@ -35,47 +44,38 @@ footer #menu {
 	line-height: 1.5em;
 }
 
-.proposal { background: #fff; border: solid 1px #e6e6e6; margin: 0 0 22px 0; padding: 0; min-height: 100px; -webkit-box-shadow: 0 1px 3px 0 #eee; }
-.proposal > :first-child { margin-top: 0; }
-.proposal > :last-child { margin-bottom: 0; }
-.proposal.callout { background: #2ba6cb; color: #fff; border-color: #2284a1; -webkit-box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.5); -moz-box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.5); box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.5); }
-.proposal.callout a { color: #fff; }
-.proposal.callout .button { background: white; border: none; color: #2ba6cb; text-shadow: none; }
-.proposal.callout .button:hover, .panel.callout .button:focus { background: rgba(255, 255, 255, 0.8); }
-.proposal.radius { -webkit-border-radius: 3px; -moz-border-radius: 3px; -ms-border-radius: 3px; -o-border-radius: 3px; border-radius: 3px; }
-
-.proposal .buttons {
+.proposal.panel .buttons {
 	float: left;
 	text-align: right;
 }
-.proposal .buttons p {
+.proposal.panel .buttons p {
 	margin: 10px;
 	padding-right: 5px;
 }
-.proposal .buttons .button {
+.proposal.panel .buttons .button {
 	width: 60px;
 	margin: 0;
 }
-.proposal .info {
+.proposal.panel .info {
 	margin: 10px;
 }
-.proposal .info p {
+.proposal.panel .info p {
 	margin: 0;
 }
-.proposal .discussion-link {
+.proposal.panel .discussion-link {
 	float: right;
 	margin: 10px;
 }
-.proposal.yes, .proposal.no {
+.proposal.panel.yes, .proposal.no {
 	min-height: 0;
 }
-.proposal.yes {
+.proposal.panel.yes {
 	background-color: #efc;
 }
-.proposal.no {
+.proposal.panel.no {
 	background-color: #fee;
 }
-.proposal.remaining {
+.proposal.panel.remaining {
 	min-height: 0;
 	text-align: center;
 }

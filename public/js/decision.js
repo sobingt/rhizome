@@ -113,7 +113,7 @@ function vote(id, choice) {
 
 /* choice is 'yes' or 'no' */
 function makeVotedProposal(proposal, choice) {
-  var proposalHTML = '<div class=\"proposal ' +
+  var proposalHTML = '<div class=\"proposal panel ' +
     choice + '\" id=\"' +
     proposal.id + '\"><span class=\"discussion-link\"><a href=\"#\" data-reveal-id=\"discussion-' +
     proposal.id + '\">Discuss (' +
@@ -130,7 +130,7 @@ function makeVotedProposal(proposal, choice) {
 
 /* helper function for makeVotableProposal and makeResultProposal*/
 function makeProposal(proposal, isVotable, count) {
-  var proposalHTML = '<div class=\"proposal\" id=\"' +
+  var proposalHTML = '<div class=\"proposal panel\" id=\"' +
     proposal.id + '\"><span class=\"discussion-link\"><a href=\"#\" data-reveal-id=\"discussion-' +
     proposal.id + '\">Discuss (' +
     proposal.argument_count + ')</a></span>';

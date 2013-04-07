@@ -23,7 +23,10 @@ exports.registerHandler = function(req, res){
   });
 
   user.save(function (err) {
-    if (err) res.redirect('/');
+    if (err) {
+      console.log(err);
+      res.redirect('/register');
+    }
     res.redirect('/');
   });
 };
