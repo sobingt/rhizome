@@ -2,18 +2,14 @@ extends layout
 
 block content
   header.row
-    .small-12.columns
-      ul.breadcrumbs
-        li.current
-          a Closed group
-        li.current
-          a Quorum: 50%
-        li.current
-          a 124 members
-  .row
-    .small-12.columns
-      h4= group.name
-      p= group.description
+    .small-9.columns
+      h3= group.name
+    .small-3.columns
+      ul
+        li
+          a(href='#') Voting rules
+        li
+          a(href='/') Administrators
   .row
       .small-7.columns
         dl.sub-nav
@@ -23,16 +19,14 @@ block content
           dd
             a(href='#') Ongoing
           dd
-            a(href='#') Ended
-          dd
             a(href='#') Passed
           dd
-            a(href='#') Failed
+            a(href='#') Not passed
       .small-2.columns
         p
           a(href='#', data-reveal-id='new-proposal').new-proposal-button.small.secondary.button.radius New decision
       .small-3.columns
-        h5.center Members (134)
+        h5.center 134 members
   .row
     .small-9.columns
       .panel
