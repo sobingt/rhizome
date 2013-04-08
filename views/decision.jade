@@ -5,30 +5,22 @@ block content
     .small-12.columns
       ul.breadcrumbs
         li
-          a(href='#') World
-        li
-          a(href='#') USA
-        li
-          a(href='#') California
-        li
-          a(href='#') Berkeley
+          a(href='#') Casa Zimbabwe
         li.current
-          a(href='#') What to do with the empty lot in Ridge?
+          a 38 already voted (55%)
+        li.current
+          a(href='/') Asked by Carl Sagan
+        li.current
+          a Ends in 4 days
   .row
     .small-8.columns#question
       h4 What to do with the empty lot in Ridge?
       p Let's replace the empty parking lot on Ridge Road with a good public space.
     .small-4.columns#info
-      span
-        | Started by 
-        a(href='#') Carl Sagan
-        | <br />
-      span Ends in 4 days<br />
-      span
-        a(href='#') 42 participants
   .row
     .small-4.columns
       dl.sub-nav
+        dt Proposals:
         dd.new-tab
           a(href='#') New
         dd.unvoted-tab.active
@@ -37,9 +29,9 @@ block content
           a(href='#') Partial results
     .small-2.columns
       p
-        a(href='#', data-reveal-id='new-proposal').new-proposal-button.small.button.radius New proposal
+        a(href='#', data-reveal-id='new-proposal').new-proposal-button.small.secondary.button.radius New proposal
     .small-6.columns
-      h4.center Your ranked votes
+      h5.center Your ranked votes
   .row#proposal-container
     .small-6.columns
       #proposal-list

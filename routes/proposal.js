@@ -10,18 +10,18 @@ exports.view = function(req, res){
 exports.arguments = function(req, res){
   res.json([
     {
-      author: 'bird',
+      author: 'Rodrigo Ochigame',
       timestamp: 'February 14th 2010, 3:25:50 pm',
       content: 'Lorem ipsum',
       replies: [
         {
-          author: 'cow',
+          author: 'Tony Chen',
           timestamp: 'February 14th 2010, 3:25:50 pm',
           content: 'This is a reply',
           replies: []
         },
         {
-          author: 'cat',
+          author: 'Aly Kopel',
           timestamp: 'February 14th 2010, 3:25:50 pm',
           content: 'This is another reply',
           replies: []
@@ -29,7 +29,7 @@ exports.arguments = function(req, res){
       ]
     },
     {
-      author: 'fish',
+      author: 'Stephanie Gardner',
       timestamp: 'February 14th 2010, 3:25:50 pm',
       content: 'Another argument',
       replies: []

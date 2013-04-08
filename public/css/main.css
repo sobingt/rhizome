@@ -13,6 +13,9 @@
 div p, div span {
 	color: #666;
 }
+li {
+	list-style-type: none;
+}
 header {
 	padding-top: 20px;
 }
@@ -37,6 +40,9 @@ footer #menu {
 	float: left;
 	text-align: right;
 }
+.panel p {
+	color: #666;
+}
 .panel .buttons p {
 	margin: 10px;
 	padding-right: 5px;
@@ -51,6 +57,16 @@ footer #menu {
 .panel .info p {
 	margin: 0;
 }
+.panel.yes, .panel.no {
+	min-height: 0 !important;
+}
+.panel.yes {
+	background-color: #efc;
+}
+.panel.no {
+	background-color: #fee;
+}
+
 
 /* -----------------------------------------
    Decision
@@ -72,15 +88,6 @@ footer #menu {
 .proposal.panel .discussion-link {
 	float: right;
 	margin: 10px;
-}
-.proposal.panel.yes, .proposal.panel.no {
-	min-height: 0;
-}
-.proposal.panel.yes {
-	background-color: #efc;
-}
-.proposal.panel.no {
-	background-color: #fee;
 }
 .proposal.panel.remaining {
 	min-height: 0;

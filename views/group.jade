@@ -2,14 +2,81 @@ extends layout
 
 block content
   header.row
-    .small-8.columns
+    .small-12.columns
+      ul.breadcrumbs
+        li.current
+          a Closed group
+        li.current
+          a Quorum: 50%
+        li.current
+          a 124 members
+  .row
+    .small-12.columns
       h4= group.name
       p= group.description
-      h4.center Ongoing decisions
+  .row
+      .small-7.columns
+        dl.sub-nav
+          dt Decisions:
+          dd.active
+            a(href='#') All
+          dd
+            a(href='#') Ongoing
+          dd
+            a(href='#') Ended
+          dd
+            a(href='#') Passed
+          dd
+            a(href='#') Failed
+      .small-2.columns
+        p
+          a(href='#', data-reveal-id='new-proposal').new-proposal-button.small.secondary.button.radius New decision
+      .small-3.columns
+        h5.center Members (134)
+  .row
+    .small-9.columns
+      .panel
+        .buttons
+          p
+            a(href='/decision/').small.secondary.button.radius Vote
+        .info
+          h5 What should we have for dinner?
+          p 3 new proposals since you last voted
       .panel
         .buttons
           p
             a(href='/decision/').small.button.radius Vote
         .info
+          h5 CZ House President 2013-2014
+          p Vote on the House President for the upcoming year
+      .panel.yes
+        .buttons
+          p
+            a.small.disabled.success.button.radius 88%
+        .info
           h5 What to do with the parking lot on Ridge?
-          p Hello
+          p Passed: Community garden
+      .panel.yes
+        .buttons
+          p
+            a.small.disabled.success.button.radius 67%
+        .info
+          h5 Invade Cloyne?
+          p Passed: Si
+      .panel.no
+        .buttons
+          p
+            a.small.disabled.alert.button.radius 55%
+        .info
+          h5 Let's remove the offensive mural
+          p Failed: only 21% voted in 3 months
+    .small-3.columns
+      ul
+        li Rodrigo Ochigame
+        li Tony Chen
+        li Aly Kopel
+        li Spencer Hitchcock
+        li Rishi Sharma
+        li Aura Dave
+        li Stephanie Gardner
+        li Connor Braa
