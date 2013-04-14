@@ -5,22 +5,23 @@ block content
     .small-12.columns
       ul.breadcrumbs
         li
-          a(href='#') Casa Zimbabwe
+          a(href='#') Wikimedia Foundation
         li.current
-          a 38 already voted (55%)
+          a 431 already voted
         li.current
-          a(href='/') Started by Carl Sagan
+          a(href='/') Started by Rodrigo Ochigame
         li.current
-          a Ends in 4 days
+          a Ends in 15 days
+        li.current
+          a Total budget: $50,000
   .row
-    .small-8.columns#question
-      h3 What to do with the empty lot in Ridge?
-      p Let's replace the empty parking lot on Ridge Road with a good public space.
-    .small-4.columns#info
+    .small-12.columns#question
+      h3 Budget: Wikimedia Retributions 2012
+      p Help us retribute our awesome contributors. Our budget for this year is $50,000.
   .row
     .small-4.columns
       dl.sub-nav
-        dt Proposals:
+        dt Items:
         dd.new-tab
           a(href='#') New
         dd.unvoted-tab.active
@@ -29,29 +30,26 @@ block content
           a(href='#') Partial results
     .small-2.columns
       p
-        a(href='#', data-reveal-id='new-proposal').new-proposal-button.small.secondary.button.radius New proposal
+        a(href='#', data-reveal-id='new-proposal').new-proposal-button.small.secondary.button.radius New item
     .small-6.columns
-      h5.center Your ranked votes
+      h5.center Your voted items
   .row#proposal-container
     .small-6.columns
       #proposal-list
     .small-6.columns
-      #proposal-list-yes
-      .proposal.panel.remaining
-        p (unvoted)
-      #proposal-list-no
+      #proposal-list-budget
   .reveal-modal.large#new-proposal
-    h4 New proposal
+    h4 Propose a new budget item
     label
     p
       label(for='title') Title
         input(type='text', placeholder='Title')
     p
-      label(for='proposal') Proposal
-        textarea(placeholder='Propose a new option')
+      label(for='proposal') Description
+        textarea(placeholder='Describe your item')
     p
       a(href='#', data-reveal-id='new-proposal').new-proposal-button.small.button.radius Submit
 
 block scripts
   script(src='/js/decision.js')
-  script(src='/js/general.js')
+  script(src='/js/budget.js')

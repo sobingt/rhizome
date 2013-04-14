@@ -1,31 +1,7 @@
 /* decision */
 
-var proposals = {};
-
-$(document).ready(function() {
-  loadProposals('unvoted', true);
-  $('#proposal-list-yes').sortable({
-    update: updateVotes
-  });
-  $('#proposal-list-no').sortable({
-    update: updateVotes
-  });
-  $('#proposal-list-yes li').disableSelection();
-  $('#proposal-list-no li').disableSelection();
-
-  $(document).foundation();
-});
-
-$('#proposal-container').on('click', '.vote-yes-button', function() {
-  vote($(this).parents('.proposal:first').attr('id'), 'yes');
-});
-
-$('#proposal-container').on('click', '.vote-no-button', function() {
-  vote($(this).parents('.proposal:first').attr('id'), 'no');
-});
-
 $('#proposal-container').on('click', '.discussion-link', function() {
-  loadArguments($(this).parents('.proposal:first').attr('id'));
+  loadArguments($(this).parents('.proposal:first').data('id'));
 });
 
 $('.new-tab').on('click', function() {
@@ -79,14 +55,6 @@ function loadProposals(order, getProposals) {
   });
 }
 
-/* update votes */
-function updateVotes(event, ui) {
-  var proposalListYes = $('#proposal-list-yes').sortable('toArray');
-  var proposalListNo = $('#proposal-list-no').sortable('toArray');
-  console.log(proposalListYes);
-  console.log(proposalListNo);
-}
-
 /* vote semaphore */
 var voteBlocked = false;
 
@@ -103,34 +71,42 @@ function vote(id, choice) {
     blockVote();
     $.each(proposals, function(i, proposal) {
       if (proposal.id == id) {
-        $('.proposal#' + id).fadeOut(200);
+        $('.proposal[data-id=' + id + ']').fadeOut(200);
         $(makeVotedProposal(proposal, choice)).hide().appendTo('#proposal-list-' + choice).show(500);
+        if (choice == 'budget') {
+          $('.slider-bar').slider({
+            range: 'min'
+          });
+        }
       }
     });
     updateVotes();
   }
 }
 
-/* choice is 'yes' or 'no' */
 function makeVotedProposal(proposal, choice) {
   var proposalHTML = '<div class=\"proposal panel ' +
-    choice + '\" id=\"' +
+    choice + '\" data-id=\"' +
     proposal.id + '\"><span class=\"discussion-link\"><a href=\"#\" data-reveal-id=\"discussion-' +
     proposal.id + '\">Discuss (' +
     proposal.argument_count + ')</a></span><div class=\"info\"><h5>' +
-    proposal.title + '</h5><p>';
-  if (proposal.content.length > 150) {
-    proposalHTML += proposal.content.substring(0,150) + '... <a href=\"#\" data-reveal-id=\"text-' + proposal.id + '\">more</a>';
-  } else {
-    proposalHTML += proposal.content;
+    proposal.title + '</h5>';
+  if (choice == 'budget') {
+    proposalHTML += '<div class=\"slider-bar\"></div>';
+  } else { // general ('yes' or 'no')
+    if (proposal.content.length > 150) {
+      proposalHTML += '<p>' + proposal.content.substring(0,150) + '... <a href=\"#\" data-reveal-id=\"text-' + proposal.id + '\">more</a></p>';
+    } else {
+      proposalHTML += '<p>' + proposal.content + '</p>';
+    }
   }
-  proposalHTML += '</p></div></div>';
+  proposalHTML += '</div></div>';
   return proposalHTML;
 }
 
 /* helper function for makeVotableProposal and makeResultProposal*/
 function makeProposal(proposal, isVotable, count) {
-  var proposalHTML = '<div class=\"proposal panel\" id=\"' +
+  var proposalHTML = '<div class=\"proposal panel\" data-id=\"' +
     proposal.id + '\"><span class=\"discussion-link\"><a href=\"#\" data-reveal-id=\"discussion-' +
     proposal.id + '\">Discuss (' +
     proposal.argument_count + ')</a></span>';

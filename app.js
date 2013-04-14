@@ -10,6 +10,7 @@ var express = require('express')
   , group = require('./routes/group')
   , decision = require('./routes/decision')
   , proposal = require('./routes/proposal')
+  , budget = require('./routes/budget')
   , http = require('http')
   , path = require('path')
   , bcrypt = require('bcrypt')
@@ -52,6 +53,7 @@ app.get('/decision/:id/unvoted', decision.unvoted);
 app.get('/decision/:id/results', decision.results);
 app.get('/proposal/:id', proposal.view);
 app.get('/proposal/:id/arguments', proposal.arguments);
+app.get('/budget', budget.view);
 
 app.post('/login', 
   passport.authenticate('local', { failureRedirect: '/login' }),

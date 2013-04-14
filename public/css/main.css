@@ -133,6 +133,15 @@ footer #menu {
 }
 
 /* -----------------------------------------
-   Page Name 2
+   Budget
 ----------------------------------------- */
 
+.panel.budget {
+	min-height: 0 !important;
+}
+.slider-bar {
+	margin: 20px 10px;
+}
+.slider-bar .ui-slider-range {
+	background: #2ba6cb;
+}

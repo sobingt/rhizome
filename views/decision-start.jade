@@ -3,10 +3,10 @@ extends layout
 block content
   header.row
     .small-6.small-centered.columns
-      h3 Start a new group
-      form(method='POST', action='/group/start')
+      h3 Start a new decision
+      form(method='POST', action='/decision/start')
         p
-          label(for='name') Name
+          label(for='title') Name
             input(type='text', value='', name='name', placeholder='Example: Berkeley Student Cooperative')
         p
           label(for='description') Description

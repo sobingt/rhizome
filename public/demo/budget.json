@@ -1,0 +1,48 @@
+{
+  "order": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "proposals": [
+    {
+      "id": 1,
+      "title": "Wikiversity to Arabic",
+      "content": "I translated the interface and documentation to Arabic.",
+      "argument_count": 0
+    },
+    {
+      "id": 2,
+      "title": "Wikidata back-end infrastructure",
+      "content": "I wrote the core implementation of Wikidata in PHP and MySQL.",
+      "argument_count": 0
+    },
+    {
+      "id": 3,
+      "title": "Smithsonian content",
+      "content": "I posted all of the open content from the Smithsonian Libraries to the Commons with clean metadata.",
+      "argument_count": 0
+    },
+    {
+      "id": 4,
+      "title": "EOL to Wikispecies",
+      "content": "I wrote a bot that syncs Wikispecies with the Encyclopedia of Life.",
+      "argument_count": 0
+    },
+    {
+      "id": 5,
+      "title": "Epistemology bibliography",
+      "content": "I fixed the bibliography of 300 Wikipedia articles in Category:Epistemology.",
+      "argument_count": 0
+    },
+    {
+      "id": 6,
+      "title": "MediaWiki JSON API",
+      "content": "Developed a JSON API for MediaWiki. GitHub commit: b8f1342c",
+      "argument_count": 0
+    }
+  ]
+}
