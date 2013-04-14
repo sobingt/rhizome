@@ -24,10 +24,6 @@ $('#proposal-container').on('click', '.vote-no-button', function() {
   vote($(this).parents('.proposal:first').data('id'), 'no');
 });
 
-$('#proposal-container').on('click', '.discussion-link', function() {
-  loadArguments($(this).parents('.proposal:first').data('id'));
-});
-
 /* update votes */
 function updateVotes(event, ui) {
   var proposalListYes = $('#proposal-list-yes').sortable('toArray', {attribute: 'data-id'});
