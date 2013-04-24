@@ -7,6 +7,7 @@ module.exports.make = function make(Schema, mongoose) {
     starter: { type: Schema.Types.ObjectId, ref: 'User' },
     title: String,
     description: String,
+    created_at: Date,
     ends_at: Date,
     proposals: [{ type: Schema.Types.ObjectId, ref: 'Proposal' }],
     votes: [{ type: Schema.Types.ObjectId, ref: 'Vote' }],

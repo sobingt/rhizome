@@ -3,23 +3,15 @@ extends layout
 block content
   header.row
     .small-6.small-centered.columns
-      h3 Start a new decision
+      h3
+        | Ask 
+        = groupName
       form(method='POST', action='/decision/start')
         p
-          label(for='title') Name
-            input(type='text', value='', name='name', placeholder='Example: Berkeley Student Cooperative')
+          label(for='title') Question
+            input(type='text', value='', name='title', placeholder='Example: What to do with the parking lot on Ridge?')
         p
           label(for='description') Description
-            input(type='text', value='', name='description', placeholder='Example: Student housing cooperative at UC Berkeley')
-        div
-          label(for='subdomain') Subdomain
-            .row.collapse
-              .small-6.columns
-                input(type='text', value='', name='subdomain', placeholder='Example: berkeleycoop')
-              .small-6.columns
-                span.postfix .rhizome.domain
-        p
-          label(for='emails') Emails of members, separated by commas
-            textarea(value='', name='emails', placeholder='Example: rose@gmail.com, sagan@nasa.gov, zizek@princeton.edu')
+            textarea(placeholder='Example: We should replace the empty parking lot on Ridge Road with something else. Suggestions?', name='description')
         p
           input(type='submit', value='Submit').small.button.radius

@@ -48,6 +48,8 @@ app.get('/group/start', ensureAuthenticated, group.start);
 app.post('/group/start', ensureAuthenticated, group.startHandler);
 app.get('/group/:subdomain', group.view);
 app.get('/decision/:id', decision.view);
+app.get('/decision/start/:subdomain', decision.start);
+app.post('/decision/start', decision.start);
 app.get('/decision/:id/new', decision.new);
 app.get('/decision/:id/unvoted', decision.unvoted);
 app.get('/decision/:id/results', decision.results);
