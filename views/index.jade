@@ -1,7 +1,33 @@
 extends layout
 
 block content
-  header.row
-    .small-12.small-centered.columns
-      h1= title
-      p= message
+  #map(style='width:100%;height:360px; border:1px solid #ccc;')
+  div(style='padding:10px 20px;')
+    dl.sub-nav
+      dt Discussions:
+      dd.active
+        a(href='') All
+      dd
+        a(href='') Health
+      dd
+        a(href='') Transportation
+      dd
+        a(href='') Housing
+      dd
+        a(href='') Environment
+      dd
+        a(href='') Food
+      dd
+        a(href='') Education
+      dd
+        a(href='') Technology
+      dd
+        a(href='') Art
+  .row
+    .small-12.columns(style='text-align:center;')
+      h3 Let's create solutions for the city.
+      p Rhizome connects your ideas to the city. What do you want to change?
+
+block scripts
+  script(src='/js/vendor/openlayers/OpenLayers.js')
+  script(src='/js/map.js')
