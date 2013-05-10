@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  #map(style='width:100%;height:360px; border:1px solid #ccc;')
+  #map(style='width:100%;height:480px')
   div(style='padding:10px 20px;')
     dl.sub-nav
       dt Discussions:
@@ -29,5 +29,6 @@ block content
       p Rhizome connects your ideas to the city. What do you want to change?
 
 block scripts
+  link(rel='stylesheet', href='/js/vendor/openlayers/theme/default/.css')
   script(src='/js/vendor/openlayers/OpenLayers.js')
   script(src='/js/map.js')

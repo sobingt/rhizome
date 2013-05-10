@@ -13,12 +13,15 @@
 div p, div span {
 	color: #808080;
 }
+
 li {
 	list-style-type: none;
 }
+
 header {
 	padding-top: 20px;
 }
+
 footer #menu {
 	padding-bottom: 20px;
 	text-align: right;
@@ -67,6 +70,17 @@ footer #menu {
 	background-color: #fee;
 }
 
+/* -----------------------------------------
+   Index
+----------------------------------------- */
+
+#featurePopup a {
+	color: #000;
+}
+
+#featurePopup a:hover {
+	text-decoration: underline;
+}
 
 /* -----------------------------------------
    Decision
