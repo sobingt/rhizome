@@ -1,6 +1,9 @@
 var models = require('../schemas/models')
   , bcrypt = require('bcrypt');
 
+/**
+ * View a group.
+ */
 exports.view = function(req, res){
   models.Group.findOne({ subdomain: req.params.subdomain })
   .populate('decisions', '')
@@ -14,10 +17,17 @@ exports.view = function(req, res){
 
 };
 
+/**
+ * View "Start a new group" page.
+ */
 exports.start = function(req, res){
   res.render('group-start', { user: req.user, title: 'Start a new group' });
 };
 
+/**
+ * Start a new group.
+ * Gets emails separated by commas. If an email is registered, add it to group. Otherwise, invite email to Rhizome. 
+ */
 exports.startHandler = function(req, res){
   var emails = req.body.emails.replace(/\s+/g, '').split(',');
 
@@ -44,7 +54,7 @@ exports.startHandler = function(req, res){
             user.save(function (err) {
               updateGroup();
             });
-          } else {
+          } else { // TODO: send invitation email to new user
             var salt = bcrypt.genSaltSync(10);
             user = new models.User({
               email: email,
@@ -72,7 +82,7 @@ exports.startHandler = function(req, res){
         }
       }
 
-    } else {
+    } else { // TODO: display error (subdomain already taken)
       res.redirect('/group/start');
     }
   });

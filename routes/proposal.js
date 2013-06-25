@@ -1,3 +1,6 @@
+/**
+ * TODO: Get a proposal (JSON).
+ */
 exports.view = function(req, res){
   res.json({
     id: req.params.id,
@@ -7,6 +10,9 @@ exports.view = function(req, res){
   });
 };
 
+/**
+ * Get a proposal's arguments (JSON).
+ */
 exports.arguments = function(req, res){
   res.json([
     {
