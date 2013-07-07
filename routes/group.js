@@ -33,7 +33,7 @@ exports.startHandler = function(req, res){
 
   models.Group.findOne({ subdomain: req.body.subdomain }, function (err, group){
 
-    if (group == null) {      
+    if (group == null) {
       var group = new models.Group({
         name: req.body.name,
         description: req.body.description,

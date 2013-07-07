@@ -1,7 +1,7 @@
 Rhizome
 =======
 
-Comprehensive framework for participatory democracy and place-based deliberation.
+A framework for civic engagement and local deliberation.
 
 Rhizome was started by a multidisciplinary team of researchers from the [Social Apps Lab](http://socialappslab.com/) at [UC Berkeley](http://berkeley.edu/).
 
@@ -21,6 +21,11 @@ You should have mongoDB running.
 Documentation
 -------------
 
-1. Decisions
+1. Groups
 
-Decisions can be private or public.
+2. Decisions
+
+3. Proposals
+
+4. Arguments
+

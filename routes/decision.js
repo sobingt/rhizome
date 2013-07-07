@@ -54,10 +54,10 @@ exports.start = function(req, res){
 };
 
 /**
- * TODO: Start a new decision.
+ * Start a new decision.
  */
 exports.startHandler = function(req, res){
-  models.Group.findOne({ subdomain: req.body.subdomain }, function (err, user){
+  models.Group.findOne({ subdomain: req.body.group }, function (err, group){
     if (group) {
       var decision = new models.Decision({
         group: group._id,
@@ -70,6 +70,10 @@ exports.startHandler = function(req, res){
         votes: [],
         active: true,
         winner: null
+      });
+      decision.save(function (err) {
+        if (err) res.redirect('/login');
+        res.redirect('/decision/' + decision._id);
       });
     } else {
       res.send(404);
